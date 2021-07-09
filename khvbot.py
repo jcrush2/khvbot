@@ -67,7 +67,7 @@ def helps(msg):
 def insert_user(user, chat):
 	main_log.info("Starting func 'insert_user'")
 
-	new_user = User.create(
+	new_user = Users.create(
 				userid=user.id)
 	new_user.save()
 
@@ -76,7 +76,7 @@ def insert_user(user, chat):
 @bot.message_handler(commands=["send"])
 def send(msg):
 	main_log.info("Starting func 'send'")
-	selected_user = User.select() 
+	selected_user = Users.select() 
 
 	for i, user in enumerate(selected_user):
 		try:
