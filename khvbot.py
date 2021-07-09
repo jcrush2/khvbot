@@ -22,6 +22,7 @@ bot = telebot.TeleBot(TELEGRAM_API)
 
 @bot.message_handler(commands=["start"])
 def start(msg):
+	main_log.info("Starting func 'start'")
 	"""
 	Функция для ответа на сообщение-команду для приветствия пользователя.
 	:param msg: Объект сообщения-команды
@@ -64,6 +65,7 @@ def helps(msg):
 
 
 def insert_user(user, chat):
+	main_log.info("Starting func 'insert_user'")
 
 	new_user = User.create(
 				userid=user.id)
@@ -73,10 +75,7 @@ def insert_user(user, chat):
 
 @bot.message_handler(commands=["send"])
 def send(msg):
-	"""
-	Функция которая выводит список пользователей с найменьшим значением кармы
-	:param msg: Объект сообщения-команды
-	"""
+	main_log.info("Starting func 'send'")
 	selected_user = User.select() 
 
 	for i, user in enumerate(selected_user):
