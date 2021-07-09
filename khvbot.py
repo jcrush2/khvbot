@@ -31,7 +31,9 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
-	insert_user(msg.from_user)
+	if not selected_user:
+		insert_user(msg.from_user)
+
 
 
 @bot.message_handler(commands=["h","help"])
