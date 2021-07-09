@@ -33,7 +33,7 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 	
 	selected_user = Users.select().where(
-		(Users.userid == user.id))
+		(Users.userid == msg.from_user.id))
 
 	if not selected_user:
 		insert_user(msg.from_user)
@@ -71,7 +71,7 @@ def helps(msg):
 	
 
 
-def insert_user(msg):
+def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
 
 	new_user = Users.create(
