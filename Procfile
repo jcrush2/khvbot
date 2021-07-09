@@ -1,1 +1,1 @@
-web: python karmator.py
+web: python khvbot.py
