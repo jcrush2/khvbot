@@ -71,7 +71,7 @@ def helps(msg):
 	
 
 
-def insert_user(user):
+def insert_user(msg):
 	main_log.info("Starting func 'insert_user'")
 
 	new_user = Users.create(
