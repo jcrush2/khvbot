@@ -31,7 +31,7 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
-	insert_user(msg.from_user, msg.chat)
+	insert_user(msg.from_user)
 
 
 @bot.message_handler(commands=["h","help"])
@@ -64,7 +64,7 @@ def helps(msg):
 	
 
 
-def insert_user(user, chat):
+def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
 
 	new_user = Users.create(
