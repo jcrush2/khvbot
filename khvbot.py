@@ -9,7 +9,7 @@ from flask import Flask, request
 import peewee as pw
 import telebot
 
-from database import User
+from database import Users
 from logger import main_log
 from telebot import types
 import config
