@@ -36,7 +36,7 @@ def start(msg):
 		(Users.userid == msg.from_user.id))
 
 	if not selected_user:
-		insert_user(msg.from_user)
+		insert_user(user)
 
 
 
