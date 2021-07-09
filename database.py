@@ -25,7 +25,7 @@ class BaseModel(pw.Model):
 		database = db
 
 
-class User(BaseModel):
+class Users(BaseModel):
 	userid = pw.IntegerField(null=False)
 
 	class Meta:
