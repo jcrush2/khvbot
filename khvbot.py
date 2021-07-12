@@ -33,12 +33,12 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 	
 
-	user = select_user(msg.from_user, msg.chat)
+	user = select_user(msg.from_user)
 	if not user:
-		insert_user(msg.from_user, msg.chat)
+		insert_user(msg.from_user)
 		
 
-def select_user(user, chat):
+def select_user(user):
 
 	selected_user = Users.select().where(
 		Users.userid == user.id).get()
@@ -77,7 +77,7 @@ def helps(msg):
 	
 
 
-def insert_user(user, chat):
+def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
 
 	new_user = Users.create(
