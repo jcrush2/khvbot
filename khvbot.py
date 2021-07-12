@@ -35,9 +35,17 @@ def start(msg):
 	selected_user = User.select().where(
 		User.userid == user.id)
 	if not selected_user:
+		print("insert_user!")
 		insert_user(msg.from_user)
 		
+def insert_user(user):
+	main_log.info("Starting func 'insert_user'")
 
+	new_user = Users.create(
+				userid=user.id)
+	new_user.save()
+	print("insert!")
+	
 def select_user(user):
 
 	selected_user = Users.select().where(
@@ -77,15 +85,6 @@ def helps(msg):
 	
 
 
-def insert_user(user):
-	main_log.info("Starting func 'insert_user'")
-
-	new_user = Users.create(
-				userid=user.id)
-	new_user.save()
-
-
-
 @bot.message_handler(commands=["send"])
 def send(msg):
 	main_log.info("Starting func 'send'")
@@ -97,7 +96,7 @@ def send(msg):
 				time.sleep(1)
 			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
-			print("Error!")
+			
 			continue
 
 
