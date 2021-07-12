@@ -41,7 +41,7 @@ def start(msg):
 def select_user(user, chat):
 
 	selected_user = Users.select().where(
-		(Users.userid == user.id)).get()
+		Users.userid == user.id).get()
 	return selected_user
 
 
