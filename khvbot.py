@@ -31,6 +31,7 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
+	insert_user(msg.from_user)
 #	user = select_user(msg.from_user)
 #	if not user:
 #		insert_user(msg.from_user)
@@ -95,6 +96,7 @@ def send(msg):
 				time.sleep(1)
 			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
+			print("Error!")
 			continue
 
 
