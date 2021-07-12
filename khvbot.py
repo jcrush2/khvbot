@@ -33,9 +33,8 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 
 	selected_user = User.select().where(
-		User.userid == user.id)
+		User.userid == msg.from_user.id)
 	if not selected_user:
-		print("insert_user!")
 		insert_user(msg.from_user)
 		
 def insert_user(user):
@@ -44,7 +43,6 @@ def insert_user(user):
 	new_user = Users.create(
 				userid=user.id)
 	new_user.save()
-	print("insert!")
 	
 def select_user(user):
 
