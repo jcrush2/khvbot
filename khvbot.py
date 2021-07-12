@@ -32,7 +32,7 @@ def start(msg):
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
 
-	selected_user = User.select().where(
+	selected_user = Users.select().where(
 		User.userid == msg.from_user.id)
 	if not selected_user:
 		insert_user(msg.from_user)
