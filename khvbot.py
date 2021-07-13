@@ -148,12 +148,12 @@ def helps(msg):
 	bot.send_message(msg.chat.id, help_mess, parse_mode="HTML")
 	
 
-@bot.message_handler(commands=["s"])
+@bot.message_handler(commands=["отправить"])
 def send(msg):
-	if len(msg.text.split()) == 1:
-		return
-	if msg.from_user.id not in config.gods:
-		return
+#	if len(msg.text.split()) == 1:
+#		return
+#	if msg.from_user.id not in config.gods:
+#		return
 	selected_user = Users.select() 
 
 	for i, user in enumerate(selected_user):
