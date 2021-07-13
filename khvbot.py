@@ -36,7 +36,7 @@ def start(msg):
 
 def change_karma(user):
 	selected_user = Users.select().where(
-		(Users.userid == user.id))
+		Users.userid == user.id)
 	if not selected_user:
 		insert_user(user, chat)
 		
