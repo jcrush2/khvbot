@@ -40,7 +40,7 @@ def select_user(user):
 
 	selected_user = Users.select().where(
 		Users.userid == user.id)
-	return selected_user
+
 		
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
