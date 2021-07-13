@@ -33,10 +33,12 @@ def start(msg):
 	bot.send_message(msg.chat.id, reply_text)
 	
 	keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-	button_phone = types.KeyboardButton(text="Отправить номер телефона", request_contact=True)
-	button_geo = types.KeyboardButton(text="Отправить местоположение", request_location=True)
+	chanel = types.KeyboardButton(text="🔈 Каналы", callback_data=chanel)
+	chats = types.KeyboardButton(text="💬 Чаты", callback_data=chats)
+	bots = types.KeyboardButton(text="🔘 Боты", callback_data=bots)
+	addcat = types.KeyboardButton(text="Добавить в каталог", callback_data=addcat)
 	keyboard.add(button_phone, button_geo)
-	bot.send_message(msg.chat.id, "Отправь мне свой номер телефона или поделись местоположением, жалкий человечишка!", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
@@ -44,7 +46,16 @@ def start(msg):
 		insert_user(msg.from_user)
 		
 
-
+@bot.callback_query_handler(func=lambda call: True)
+def query_handler(call):
+	if call.data == 'chanel':
+		bot.send_message(call.message.chat.id, f"🐊 каталог", parse_mode="HTML")
+	if call.data == 'chats':
+		bot.send_message(call.message.chat.id, f"🐊 chats", parse_mode="HTML")
+	if call.data == 'bots':
+		bot.send_message(call.message.chat.id, f"🐊 bots", parse_mode="HTML")
+	if call.data == 'addcat':
+		bot.send_message(call.message.chat.id, f"🐊 addcat", parse_mode="HTML")
 
 		
 def insert_user(user):
