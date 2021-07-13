@@ -94,8 +94,7 @@ def id(msg):
 		new_user = Users.create(
 					userid=user)
 		new_user.save()
-		if i == 200: # There's gotta be a better way.
-			break
+
 			
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
