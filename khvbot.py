@@ -37,7 +37,9 @@ def start(msg):
 def change_karma(user):
 	selected_user = Users.select().where(
 		Users.userid == user.id)
+	print ("test")
 	if not selected_user:
+		print ("test2")
 		insert_user(user)
 		
 def insert_user(user):
