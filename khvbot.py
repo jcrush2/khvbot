@@ -77,8 +77,7 @@ def send(msg):
 		try:
 			if user % 20 == 0:
 				time.sleep(1)
-			bot.send_message(msg.chat.id, user.userid, parse_mode="Markdown")
-#			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
+			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
 			continue
 
