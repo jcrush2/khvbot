@@ -134,27 +134,32 @@ def insert_user(user):
 				userid=user.id)
 	new_user.save()
 	
-@bot.message_handler(content_types=['text'])
-def text(msg):
-	if msg.text == "🔈 Каналы":
-		channels(msg)
-	if msg.text == "💬 Чаты":
-		chats(msg)
-	if msg.text == "🔘 Боты":
-		bots(msg)
-	if msg.text == "Добавить в каталог":
-		helps(msg)
 		
 		
 
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
-def all_messages(message):
+def all_messages(msg):
 	TO_CHAT_ID= -542531596
-	bot.forward_message(TO_CHAT_ID, message.chat.id, message.message_id)
-	bot.send_message(message.chat.id, str(message.from_user.first_name) + ',' + ' Bla Bla Bla Bla')
+
+		
+	if msg.text == "🔈 Каналы":
+		channels(msg)
+		return
+	if msg.text == "💬 Чаты":
+		chats(msg)
+		return
+	if msg.text == "🔘 Боты":
+		bots(msg)
+		return
+	if msg.text == "Добавить в каталог":
+		helps(msg)
+		return
+
+	bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
+	bot.send_message(msg.chat.id, str(msg.from_user.first_name) + ',' + ' Bla Bla Bla Bla')
  
-	if int(message.chat.id) == TO_CHAT_ID:
-		bot.forward_message(message.reply_to_message.forward_from.id, TO_CHAT_ID, message.text)
+	if int(msg.chat.id) == TO_CHAT_ID:
+		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
 		bot.send_message(TO_CHAT_ID, text)
         
 	"""	
