@@ -44,7 +44,43 @@ def start(msg):
 		Users.userid == msg.from_user.id)
 	if not selected_user:
 		insert_user(msg.from_user)
-		
+
+@bot.message_handler(commands=["h","help"])
+def helps(msg):
+
+	help_mess = "<b>ХабЧат</b> - чат города Хабаровска.\
+	\n\nℹ️ Выражения похвалы и общение в положительном ключе повышают карму, ругательства понижают.\
+	\n\n<b>Команды:</b>\
+	\n/h - Справка\
+	\n/weather - Погода\
+	\n/no - Для объявлений\
+	\n/report - Отправить жалобу\
+	\n/croco - Игра в Крокодил\
+	\n\n<b>/утра /цитата /дата /погода /кот /шутка /? /сохранить /привет /фсб /фото /бан</b> - Ответом на сообщение\
+	\n\n<b>Карма:</b>\
+	\n/my - Посмотреть свою карму\
+	\n/top - Узнать наиболее благодаримых в чате\
+	\n/gift - Подарить +5 карму\
+	\n/freez - Заморозка кармы\
+	\n/unfreez - Разморозка\
+	\n<b>/тиндер</b> - Найти пару\
+	\n<b>🎲🎰🏀🎳⚽️</b> - Рандом кармы"
+	
+	bot.send_message(msg.chat.id, help_mess, parse_mode="HTML")
+
+@bot.message_handler(commands=["send"])
+def send(msg):
+	main_log.info("Starting func 'send'")
+	selected_user = Users.select() 
+
+	for user in enumerate(selected_user):
+		try:
+			if user % 20 == 0:
+				time.sleep(1)
+			bot.send_message(msg.chat.id, user.userid, parse_mode="Markdown")
+#			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
+		except:
+			continue
 
 @bot.message_handler(content_types=['text'])
 def catalogchk(msg):
@@ -101,14 +137,6 @@ def catalogchk(msg):
 
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 		
-@bot.callback_query_handler(func=lambda call: True)
-def query_handler(call):
-	if call.data == 'chanel':
-		bot.send_message(call.message.chat.id, f"🐊 каталог", parse_mode="HTML")
-	if call.data == 'chats':
-		bot.send_message(call.message.chat.id, f"🐊 chats", parse_mode="HTML")
-	if call.data == 'bots':
-		bot.send_message(call.message.chat.id, f"🐊 bots", parse_mode="HTML")
 
 
 		
@@ -119,47 +147,7 @@ def insert_user(user):
 				userid=user.id)
 	new_user.save()
 
-@bot.message_handler(commands=["h","help"])
-def helps(msg):
-	"""
-	Функция для отправки списка общедоступных команд для бота
-	:param msg: Объект сообщения-команды
-	"""
 
-
-	help_mess = "<b>ХабЧат</b> - чат города Хабаровска.\
-	\n\nℹ️ Выражения похвалы и общение в положительном ключе повышают карму, ругательства понижают.\
-	\n\n<b>Команды:</b>\
-	\n/h - Справка\
-	\n/weather - Погода\
-	\n/no - Для объявлений\
-	\n/report - Отправить жалобу\
-	\n/croco - Игра в Крокодил\
-	\n\n<b>/утра /цитата /дата /погода /кот /шутка /? /сохранить /привет /фсб /фото /бан</b> - Ответом на сообщение\
-	\n\n<b>Карма:</b>\
-	\n/my - Посмотреть свою карму\
-	\n/top - Узнать наиболее благодаримых в чате\
-	\n/gift - Подарить +5 карму\
-	\n/freez - Заморозка кармы\
-	\n/unfreez - Разморозка\
-	\n<b>/тиндер</b> - Найти пару\
-	\n<b>🎲🎰🏀🎳⚽️</b> - Рандом кармы"
-	
-	bot.send_message(msg.chat.id, help_mess, parse_mode="HTML")
-
-@bot.message_handler(commands=["send"])
-def send(msg):
-	main_log.info("Starting func 'send'")
-	selected_user = Users.select() 
-
-	for user in enumerate(selected_user):
-		try:
-			if user % 20 == 0:
-				time.sleep(1)
-			bot.send_message(msg.chat.id, user.userid, parse_mode="Markdown")
-#			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
-		except:
-			continue
 
 
 # bot.polling(none_stop=True)
