@@ -73,9 +73,9 @@ def send(msg):
 	main_log.info("Starting func 'send'")
 	selected_user = Users.select() 
 
-	for user in enumerate(selected_user):
+	for i,user in enumerate(selected_user):
 		try:
-			if user % 20 == 0:
+			if i % 20 == 0:
 				time.sleep(1)
 			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
