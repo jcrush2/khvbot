@@ -49,7 +49,9 @@ def start(msg):
 @bot.message_handler(content_types=['text'])
 def catalogchk(msg):
 	if msg.text == "🔈 Каналы":
-		bot.send_message(msg.chat.id, f"🐊 каталог", parse_mode="HTML")
+		chanel = random.choice(config.chanel)
+
+		bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 		
 @bot.callback_query_handler(func=lambda call: True)
 def query_handler(call):
