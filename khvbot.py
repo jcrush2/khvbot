@@ -32,13 +32,14 @@ def start(msg):
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
 	
-	keyboard = telebot.types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-	chanel = telebot.types.KeyboardButton(text="🔈 Каналы", callback_data=chanel)
-	chats = telebot.types.KeyboardButton(text="💬 Чаты", callback_data=chats)
-	bots = telebot.types.KeyboardButton(text="🔘 Боты", callback_data=bots)
-	addcat = telebot.types.KeyboardButton(text="Добавить в каталог", callback_data=addcat)
+	keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True)
+	chanel = types.KeyboardButton(text="🔈 Каналы", callback_data=chanel)
+	chats = types.KeyboardButton(text="💬 Чаты", callback_data=chats)
+	bots = types.KeyboardButton(text="🔘 Боты", callback_data=bots)
+	addcat = types.KeyboardButton(text="Добавить в каталог", callback_data=addcat)
 	keyboard.add(chanel, chats,bots,addcat)
-	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
+
+	msg_id = bot.send_message(chat_id=msg.chat.id, text=f'Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️', reply_markup=keyboard).message_id
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
