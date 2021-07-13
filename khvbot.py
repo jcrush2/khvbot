@@ -30,8 +30,8 @@ def start(msg):
 	reply_text = (
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
-	bot.send_message(msg.chat.id, reply_text)
 	change_karma(msg.from_user)
+	bot.send_message(msg.chat.id, reply_text)
 
 
 def change_karma(user):
