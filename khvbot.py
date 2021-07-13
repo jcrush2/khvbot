@@ -30,17 +30,17 @@ def start(msg):
 	reply_text = (
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
-	change_karma(msg.from_user)
 	bot.send_message(msg.chat.id, reply_text)
+	user = select_user(msg.from_user)
+	if not user:
+		insert_user(msg.from_user)
 
 
-def change_karma(user):
+def select_user(user):
+
 	selected_user = Users.select().where(
-		Users.userid == user.id)
-	print ("test")
-	if not selected_user:
-		print ("test2")
-		insert_user(user)
+		Users.userid == user.id).get()
+	return selected_user
 		
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
