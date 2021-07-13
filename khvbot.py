@@ -49,7 +49,7 @@ def start(msg):
 @bot.message_handler(content_types=['text'])
 def catalogchk(msg):
 	if msg.text == "🔈 Каналы":
-		chanel = random.choice(config.chanel)
+		chanel = config.chanel
 
 		bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 		
