@@ -36,7 +36,7 @@ def start(msg):
 	button_phone = types.KeyboardButton(text="Отправить номер телефона", request_contact=True)
 	button_geo = types.KeyboardButton(text="Отправить местоположение", request_location=True)
 	keyboard.add(button_phone, button_geo)
-	bot.send_message(message.chat.id, "Отправь мне свой номер телефона или поделись местоположением, жалкий человечишка!", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "Отправь мне свой номер телефона или поделись местоположением, жалкий человечишка!", reply_markup=keyboard)
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
