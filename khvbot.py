@@ -31,21 +31,21 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
-	user = select_user(msg.from_user)
-	if not user:
-		insert_user(msg.from_user)
+	change_karma(msg.from_user)
 
 
-		
-
-def select_user(msg):
-
+def change_karma(user):
 	selected_user = Users.select().where(
-		Users.userid == msg.from_user.id).get()
-	return selected_user
+		(Users.userid == user.id))
+	if not selected_user:
+		insert_user(user, chat)
+		
+def insert_user(user):
+	main_log.info("Starting func 'insert_user'")
 
-
-
+	new_user = Users.create(
+				userid=user.id)
+	new_user.save()
 
 @bot.message_handler(commands=["h","help"])
 def helps(msg):
@@ -76,16 +76,6 @@ def helps(msg):
 	bot.send_message(msg.chat.id, help_mess, parse_mode="HTML")
 	
 
-
-def insert_user(user):
-	main_log.info("Starting func 'insert_user'")
-
-	new_user = Users.create(
-				userid=user.id)
-	new_user.save()
-
-
-
 @bot.message_handler(commands=["send"])
 def send(msg):
 	main_log.info("Starting func 'send'")
@@ -97,7 +87,6 @@ def send(msg):
 				time.sleep(1)
 			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
-			print("Error!")
 			continue
 
 
