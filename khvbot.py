@@ -152,9 +152,10 @@ def send(msg):
 	main_log.info("Starting func 'send'")
 	selected_user = Users.select() 
 
-	for i, user in enumerate(selected_user):
+	for user in enumerate(selected_user):
 		try:
-
+			if user % 20 == 0:
+				time.sleep(1)
 			bot.send_message(msg.chat.id, user.userid, parse_mode="Markdown")
 #			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
