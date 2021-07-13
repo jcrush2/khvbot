@@ -144,7 +144,35 @@ def text(msg):
 		bots(msg)
 	if msg.text == "Добавить в каталог":
 		helps(msg)
+		
+		
 
+@bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
+def all_messages(message):
+	TO_CHAT_ID= -542531596
+	bot.forward_message(TO_CHAT_ID, message.chat.id, message.message_id)
+	bot.send_message(message.chat.id, str(message.from_user.first_name) + ',' + ' Bla Bla Bla Bla')
+ 
+	if int(message.chat.id) == TO_CHAT_ID:
+		bot.forward_message(message.reply_to_message.forward_from.id, TO_CHAT_ID, message.text)
+		bot.send_message(TO_CHAT_ID, text)
+        
+	"""	
+def is_subscribed(chat_id, user_id):
+    try:
+        bot.get_chat_member(chat_id, user_id)
+        return True
+    except ApiTelegramException as e:
+        if e.result_json['description'] == 'Bad Request: user not found':
+            return False
+
+if not is_subscribed(CHAT_ID, USER_ID):
+    # user is not subscribed. send message to the user
+    bot.send_message(CHAT_ID, 'Please subscribe to the channel')
+else:
+    # user is subscribed. continue with the rest of the logic
+    # ...
+"""
 
 # bot.polling(none_stop=True)
 
