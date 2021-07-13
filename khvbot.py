@@ -31,10 +31,19 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
+    
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
 	if not selected_user:
 		insert_user(msg.from_user)
+		
+	keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+	button_phone = types.KeyboardButton(text="Отправить номер телефона", request_contact=True)
+	button_geo = types.KeyboardButton(text="Отправить местоположение", request_location=True)
+	keyboard.add(button_phone, button_geo)
+	bot.send_message(message.chat.id, "Отправь мне свой номер телефона или поделись местоположением, жалкий человечишка!", reply_markup=keyboard)
+
+
 
 		
 def insert_user(user):
