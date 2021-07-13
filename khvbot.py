@@ -148,7 +148,7 @@ def helps(msg):
 	bot.send_message(msg.chat.id, help_mess, parse_mode="HTML")
 	
 
-@bot.message_handler(commands=["отправить"])
+@bot.message_handler(commands=["send"])
 def send(msg):
 #	if len(msg.text.split()) == 1:
 #		return
