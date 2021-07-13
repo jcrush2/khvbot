@@ -54,7 +54,59 @@ def helps(msg):
 \n• принимаются только тематики явно связанные с Хабаровском\
 \n• необходимо Рассказать о боте в своем канале\группе\
 \n\nСпасибо!"
+	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
+@bot.message_handler(commands=["channels"])
+def channels(msg):
+
+	chanel = "<b>• Новости</b>\
+\n\n@khv_news - куда сходить, актуальные новости, и общение в Хабаровске⭐\
+\n\n@truehabarovsk - Хабаровские тёрки - политика, происшествия, картина дня\
+\n\n@amurmedianews - быстрые, свежие и разные новости Хабаровска и Хабаровского края\
+\n\n@khabarovsktg - новостной канал, своевременно и без воды, погода, пробки и курс валют\
+\n\n@sminych - точка зрения хабаровского журналиста Сергея Мингазова\
+\n\n@nedebri - околополитическая жизнь Дальнего Востока\
+\n\n@korifeyhab - политический канал Хабаровского края\
+\n\n@t_khabarovsk - типичный Хабаровск, народные новости нашего городка, в лучших традициях\
+\n\n@vehernij_habarovsk - вечерний Хабаровск\
+\n\n@guberniaonline - Губерния - новости и культурные события в Хабаровске\
+\n\n@newskhv - новости о которых говорит весь город, самое интересное и актуальное\
+\n\n<b>• Разное</b>\
+\n\n@love_khv - знакомства в Хабаровске⭐️\
+\n\n@j_crush - иногда заметки о Хабаровске\
+\n\n@khabara_ru - Объявления Хабаровск\
+\n\n@sky_khv - Фитнес-клуб Sky - тренировки, расписания, акции\
+\n\n@hbk_market - барахолка Хабаровска"
+	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+
+@bot.message_handler(commands=["chats"])
+def chats(msg):
+	
+	chanel = "• <b>Общение</b>\
+\n\n@khvchat - самый крупный чат Хабаровска⭐️\
+\n\n@dvchat - Чат Дальнего Востока\
+\n\n@pokemongokhv - группа Хабаровска по игре Pokemon Go\
+\n\n@habchat - типичный ХабаровЧат\
+\n\n@xadev_chat - IT-сообщество Хабаровска\
+\n\n@rybak_amur - рыбак Приамурья\
+\n\n<b>• Объявления</b>\
+\n\n@market27 - доска объявлений Хабаровска⭐️\
+\n\n@khvjob - поиск работы в Хабаровске. Вакансии и резюме⭐️\
+\n\n@rupor_khv - Хабаровская группа объявлений\
+\n\n<b>• Разное</b>\
+\n\n@stopgai27 - STOP GAI [Хабаровск]\
+\n\n@freetaxi_hbk - Подвезу бесплатно ХБК - помощь в передвижении по Хабаровску\
+\n\n@game_pub - Чат посвященный играм и всему что с ними связано"
+	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+
+@bot.message_handler(commands=["bots"])
+def bots(msg):
+	
+	chanel = "•<b> Боты</b>\
+\n\n@khvbot - каталог каналов, чатов и ботов Хабаровска⭐️\
+\n\n@moder_khvbot - модератор на защите чата Хабаровска @khvchat \
+\n\n@uslugi27Bot - госуслуги Хабаровского края\
+\n\n@botvacc27bot - все о вакцинации в Хабаровском крае"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
 @bot.message_handler(commands=["s"])
@@ -92,64 +144,6 @@ def text(msg):
 		bots(msg)
 	if msg.text == "Добавить в каталог":
 		helps(msg)
-
-def channels(msg):
-
-	chanel = "<b>• Новости</b>\
-\n\n@khv_news - куда сходить, актуальные новости, и общение в Хабаровске⭐\
-\n\n@truehabarovsk - Хабаровские тёрки - политика, происшествия, картина дня\
-\n\n@amurmedianews - быстрые, свежие и разные новости Хабаровска и Хабаровского края\
-\n\n@khabarovsktg - новостной канал, своевременно и без воды, погода, пробки и курс валют\
-\n\n@sminych - точка зрения хабаровского журналиста Сергея Мингазова\
-\n\n@nedebri - околополитическая жизнь Дальнего Востока\
-\n\n@korifeyhab - политический канал Хабаровского края\
-\n\n@t_khabarovsk - типичный Хабаровск, народные новости нашего городка, в лучших традициях\
-\n\n@vehernij_habarovsk - вечерний Хабаровск\
-\n\n@guberniaonline - Губерния - новости и культурные события в Хабаровске\
-\n\n@newskhv - новости о которых говорит весь город, самое интересное и актуальное\
-\n\n<b>• Разное</b>\
-\n\n@love_khv - знакомства в Хабаровске⭐️\
-\n\n@j_crush - иногда заметки о Хабаровске\
-\n\n@khabara_ru - Объявления Хабаровск\
-\n\n@sky_khv - Фитнес-клуб Sky - тренировки, расписания, акции\
-\n\n@hbk_market - барахолка Хабаровска"
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-
-def chats(msg):
-	
-	chanel = "• <b>Общение</b>\
-\n\n@khvchat - самый крупный чат Хабаровска⭐️\
-\n\n@dvchat - Чат Дальнего Востока\
-\n\n@pokemongokhv - группа Хабаровска по игре Pokemon Go\
-\n\n@habchat - типичный ХабаровЧат\
-\n\n@xadev_chat - IT-сообщество Хабаровска\
-\n\n@rybak_amur - рыбак Приамурья\
-\n\n<b>• Объявления</b>\
-\n\n@market27 - доска объявлений Хабаровска⭐️\
-\n\n@khvjob - поиск работы в Хабаровске. Вакансии и резюме⭐️\
-\n\n@rupor_khv - Хабаровская группа объявлений\
-\n\n<b>• Разное</b>\
-\n\n@stopgai27 - STOP GAI [Хабаровск]\
-\n\n@freetaxi_hbk - Подвезу бесплатно ХБК - помощь в передвижении по Хабаровску\
-\n\n@game_pub - Чат посвященный играм и всему что с ними связано"
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-
-def bots(msg):
-	
-	chanel = "•<b> Боты</b>\
-\n\n@khvbot - каталог каналов, чатов и ботов Хабаровска⭐️\
-\n\n@moder_khvbot - модератор на защите чата Хабаровска @khvchat \
-\n\n@uslugi27Bot - госуслуги Хабаровского края\
-\n\n@botvacc27bot - все о вакцинации в Хабаровском крае"
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-
-
-		
-
-
-		
-
-
 
 
 # bot.polling(none_stop=True)
