@@ -32,14 +32,13 @@ def start(msg):
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
 	
-	keyboard = types.ReplyKeyboardMarkup(one_time_keyboard=True)
-	chanel = types.KeyboardButton(text="🔈 Каналы", callback_data=chanel)
-	chats = types.KeyboardButton(text="💬 Чаты", callback_data=chats)
-	bots = types.KeyboardButton(text="🔘 Боты", callback_data=bots)
-	addcat = types.KeyboardButton(text="Добавить в каталог", callback_data=addcat)
+	keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
+	chanel = types.KeyboardButton(text="🔈 Каналы")
+	chats = types.KeyboardButton(text="💬 Чаты")
+	bots = types.KeyboardButton(text="🔘 Боты")
+	addcat = types.KeyboardButton(text="Добавить в каталог")
 	keyboard.add(chanel, chats,bots,addcat)
-
-	msg_id = bot.send_message(chat_id=msg.chat.id, text=f'Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️', reply_markup=keyboard).message_id
+	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
@@ -47,6 +46,11 @@ def start(msg):
 		insert_user(msg.from_user)
 		
 
+@bot.message_handler(content_types=['text'])
+def catalogchk(msg):
+	if msg.text == "🔈 Каналы":
+		bot.send_message(msg.chat.id, f"🐊 каталог", parse_mode="HTML")
+		
 @bot.callback_query_handler(func=lambda call: True)
 def query_handler(call):
 	if call.data == 'chanel':
