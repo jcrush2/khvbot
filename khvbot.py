@@ -150,6 +150,8 @@ def helps(msg):
 
 @bot.message_handler(commands=["send"])
 def send(msg):
+	main_log.info("Starting func 'send'")
+	
 #	if len(msg.text.split()) == 1:
 #		return
 #	if msg.from_user.id not in config.gods:
@@ -160,7 +162,7 @@ def send(msg):
 		try:
 			if i % 20 == 0:
 				time.sleep(1)
-			bot.send_message(user.userid, msg.text, parse_mode="HTML" )
+			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
 		except:
 			continue
 
