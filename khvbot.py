@@ -45,7 +45,17 @@ def start(msg):
 	if not selected_user:
 		insert_user(msg.from_user)
 
+@bot.message_handler(commands=["help"])
+def helps(msg):
+	
+	chanel ="Чтобы попасть в каталог необходимо:\
+\n\n• иметь не менее 50-100 подписчиков\
+\n• прислать публичный адрес (типа @khv_news) сюда: @khv_robot\
+\n• принимаются только тематики явно связанные с Хабаровском\
+\n• необходимо Рассказать о боте в своем канале\группе\
+\n\nСпасибо!"
 
+	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
 @bot.message_handler(commands=["s"])
 def send(msg):
@@ -133,17 +143,7 @@ def bots(msg):
 \n\n@botvacc27bot - все о вакцинации в Хабаровском крае"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
-@bot.message_handler(commands=["help"])
-def helps(msg):
-	
-	chanel ="Чтобы попасть в каталог необходимо:\
-\n\n• иметь не менее 50-100 подписчиков\
-\n• прислать публичный адрес (типа @khv_news) сюда: @khv_robot\
-\n• принимаются только тематики явно связанные с Хабаровском\
-\n• необходимо Рассказать о боте в своем канале\группе\
-\n\nСпасибо!"
 
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 		
 
 
