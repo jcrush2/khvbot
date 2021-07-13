@@ -31,15 +31,10 @@ def start(msg):
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
 	bot.send_message(msg.chat.id, reply_text)
-	user = select_user(msg.from_user)
-	if not user:
-		insert_user(msg.from_user)
-
-
-def select_user(user):
-
 	selected_user = Users.select().where(
-		Users.userid == user.id)
+		Users.userid == msg.from_user.id)
+	if not selected_user:
+		insert_user(msg.from_user)
 
 		
 def insert_user(user):
