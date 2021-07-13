@@ -68,16 +68,20 @@ def helps(msg):
 	
 	bot.send_message(msg.chat.id, help_mess, parse_mode="HTML")
 
-@bot.message_handler(commands=["send"])
+@bot.message_handler(commands=["s"])
 def send(msg):
 	main_log.info("Starting func 'send'")
+	if msg.from_user.id not in config.gods:
+		return
+	if len(msg.text.split()) == 1:
+		return
 	selected_user = Users.select() 
 
 	for i,user in enumerate(selected_user):
 		try:
 			if i % 20 == 0:
 				time.sleep(1)
-			bot.send_message(user.userid, "Тест рассылки от @khvchat", parse_mode="HTML" )
+			bot.send_message(user.userid, msg.text[2:], parse_mode="HTML" )
 		except:
 			continue
 
