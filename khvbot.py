@@ -37,7 +37,7 @@ def start(msg):
 	chats = types.KeyboardButton(text="💬 Чаты", callback_data=chats)
 	bots = types.KeyboardButton(text="🔘 Боты", callback_data=bots)
 	addcat = types.KeyboardButton(text="Добавить в каталог", callback_data=addcat)
-	keyboard.add(button_phone, button_geo)
+	keyboard.add(chanel, chats,bots,addcat)
 	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
     
 	selected_user = Users.select().where(
@@ -55,7 +55,12 @@ def query_handler(call):
 	if call.data == 'bots':
 		bot.send_message(call.message.chat.id, f"🐊 bots", parse_mode="HTML")
 	if call.data == 'addcat':
-		bot.send_message(call.message.chat.id, f"🐊 addcat", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"Чтобы попасть в каталог необходимо:\
+\n\n• иметь не менее 50-100 подписчиков\
+\n• прислать публичный адрес (типа: @khv_news)\
+\n• принимаются только тематики явно связанные с Хабаровском\
+\n• необходимо Поделиться ботом в своем канале\группе\
+\n\nСпасибо!", parse_mode="HTML")
 
 		
 def insert_user(user):
