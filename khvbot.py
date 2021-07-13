@@ -92,7 +92,7 @@ def id(msg):
 
 	for i, user in selected_user:
 		try:
-			if i % 150 == 0:
+			if i % 20 == 0:
 				time.sleep(1)
 			new_user = Users.create(
 				userid=user)
