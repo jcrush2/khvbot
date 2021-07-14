@@ -135,13 +135,8 @@ def all_messages(msg):
 	if msg.text == "Добавить в каталог":
 		helps(msg)
 		return
- 
-	if msg.chat.id == TO_CHAT_ID:
-		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
-		bot.send_message(TO_CHAT_ID, "sdfdsfd", parse_mode="HTML")
-	else:
-		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
-		bot.send_message(msg.chat.id, f"{msg.from_user.first_name}  Bla Bla Bla Bla", parse_mode="HTML")
+		
+	bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
         
 	"""	
 def is_subscribed(chat_id, user_id):
