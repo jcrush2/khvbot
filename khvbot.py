@@ -75,7 +75,7 @@ def chats(msg):
 \n\n<b>• Каналы Хабаровска</b>\
 \n\n@khv_news - куда сходить, актуальные новости Хабаровска\
 \n\n@love_khv - знакомства\
-\n\n@j_crush - о Хабаровске\
+\n\n@j_crush - заметки о Хабаровске\
 \n\n@khabara_ru - объявления Хабаровск\
 \n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
