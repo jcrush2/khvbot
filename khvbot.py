@@ -22,16 +22,7 @@ bot = telebot.TeleBot(TELEGRAM_API)
 def start(msg):
 	main_log.info("Starting func 'start'")
 
-	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
-
-	
-	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	newsadd = telebot.types.KeyboardButton(text="☑ Прислать новость")
-	cat = telebot.types.KeyboardButton(text="☑️ Каталог")
-	loveadd = telebot.types.KeyboardButton(text="☑️ Знакомства")
-	keyboard.add(newsadd, cat, loveadd)
-	bot.send_message(msg.chat.id, "Выберите сервис ниже ⤵️", reply_markup=keyboard)
-	
+	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото, знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
@@ -45,8 +36,17 @@ def cat(msg):
 	chats = telebot.types.KeyboardButton(text="💬 Чаты")
 	bots = telebot.types.KeyboardButton(text="🔘 Боты")
 	addcat = telebot.types.KeyboardButton(text="☑️ Добавить в каталог")
-	keyboard.add(chanel, chats, bots, addcat)
+	maingo = telebot.types.KeyboardButton(text="☑️ Меню")
+	keyboard.add(chanel, chats, bots, addcat, maingo)
 	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты ⤵️", reply_markup=keyboard)
+@bot.message_handler(commands=["main"])
+def main(msg):
+	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+	newsadd = telebot.types.KeyboardButton(text="☑ Прислать новость")
+	cat = telebot.types.KeyboardButton(text="☑️ Каталог")
+	loveadd = telebot.types.KeyboardButton(text="☑️ Знакомства")
+	keyboard.add(newsadd, cat, loveadd)
+	bot.send_message(msg.chat.id, "Выберите сервис ниже ⤵️", reply_markup=keyboard)
 
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
@@ -176,6 +176,9 @@ def all_messages(msg):
 	if msg.text == "☑️ Каталог":
 		cat(msg)
 		return
+	if msg.text == "☑️ Меню":
+		main(msg)
+		return
  
 	if msg.chat.id == TO_CHAT_ID:
 		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
@@ -183,6 +186,7 @@ def all_messages(msg):
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
+	main(msg)
         
 	"""	
 def is_subscribed(chat_id, user_id):
