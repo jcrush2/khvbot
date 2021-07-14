@@ -42,10 +42,11 @@ def cat(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	newsadd = telebot.types.KeyboardButton(text="Прислать новость!")
-	cat = telebot.types.KeyboardButton(text="📂️ Каталог")
-	loveadd = telebot.types.KeyboardButton(text="Знакомства.")
-	keyboard.add(newsadd, cat, loveadd)
+	servis = telebot.types.KeyboardButton(text="Сервисы")
+	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
+	cat = telebot.types.KeyboardButton(text="📂️ Группы")
+	loveadd = telebot.types.KeyboardButton(text="Знакомствa")
+	keyboard.add(servis, cat, loveadd,newsadd)
 	bot.send_message(msg.chat.id, "⤵️", reply_markup=keyboard)
 
 def insert_user(user):
@@ -109,21 +110,17 @@ def channels(msg):
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
-	chanel = "• <b>Общение</b>\
+	chanel = "• <b>Чаты и группы</b>\
 \n\n@khvchat - самый крупный чат Хабаровска⭐️\
-\n\n@dvchat - Чат Дальнего Востока\
-\n\n@pokemongokhv - группа Хабаровска по игре Pokemon Go\
-\n\n@habchat - типичный ХабаровЧат\
-\n\n@xadev_chat - IT-сообщество Хабаровска\
-\n\n@rybak_amur - рыбак Приамурья\
-\n\n<b>• Объявления</b>\
+\n\n@dvchat - чат Дальнего Востока\
 \n\n@market27 - доска объявлений Хабаровска⭐️\
-\n\n@khvjob - поиск работы в Хабаровске. Вакансии и резюме⭐️\
-\n\n@rupor_khv - Хабаровская группа объявлений\
-\n\n<b>• Разное</b>\
-\n\n@stopgai27 - STOP GAI [Хабаровск]\
-\n\n@freetaxi_hbk - Подвезу бесплатно ХБК - помощь в передвижении по Хабаровску\
-\n\n@game_pub - Чат посвященный играм и всему что с ними связано"
+\n\n@khvjob - поиск работы в Хабаровске. Вакансии и резюме\
+\n\n<b>• Каналы</b>\
+\n\n@khv_news - куда сходить, актуальные новости, и общение в Хабаровске⭐\
+\n\n@love_khv - знакомства в Хабаровске⭐️\
+\n\n@j_crush - иногда заметки о Хабаровске\
+\n\n@khabara_ru - объявления Хабаровск\
+\n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
 @bot.message_handler(commands=["bots"])
@@ -166,16 +163,16 @@ def all_messages(msg):
 	if msg.text == "🔘 Боты":
 		bots(msg)
 		return
-	if msg.text == "Прислать новость!":
+	if msg.text == "Прислaть новость!":
 		addnews(msg)
 		return
 	if msg.text == "Добавить в каталог!":
 		helps(msg)
 		return
-	if msg.text == "Знакомства.":
+	if msg.text == "Знакомствa":
 		addlove(msg)
 		return
-	if msg.text == "📂️ Каталог":
+	if msg.text == "📂️ Группы":
 		cat(msg)
 		return
 	if msg.text == "Меню":
