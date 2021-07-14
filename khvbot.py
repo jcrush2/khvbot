@@ -25,7 +25,7 @@ def start(msg):
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
 	main_log.info("Starting func 'bottom'")
 	
-	keyboard = telebot.types.ReplyKeyboardMarkup()
+	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 	chanel = telebot.types.KeyboardButton(text="🔈 Каналы")
 	chats = telebot.types.KeyboardButton(text="💬 Чаты")
 	bots = telebot.types.KeyboardButton(text="🔘 Боты")
@@ -50,7 +50,7 @@ def insert_user(user):
 
 @bot.message_handler(commands=["help"])
 def helps(msg):
-	chanel ="Чтобы попасть в каталог необходимо:\
+	chanel ="Чтобы попасть в каталог @khvbot необходимо:\
 \n\n• иметь не менее 70-100 подписчиков\
 \n• прислать публичный адрес (пример @khv_news)\
 \n• принимаются только тематики явно связанные с Хабаровском\
