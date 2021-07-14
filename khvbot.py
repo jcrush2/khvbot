@@ -32,12 +32,12 @@ def start(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	servise = telebot.types.KeyboardButton(text="Сервисы")
+	servise = telebot.types.KeyboardButton(text="🔘 Сервисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
-	cat = telebot.types.KeyboardButton(text="Группы")
-	loveadd = telebot.types.KeyboardButton(text="Любовь")
+	cat = telebot.types.KeyboardButton(text="📂️ Группы")
+	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
 	keyboard.add(servise, cat, loveadd, newsadd)
-	bot.send_message(msg.chat.id, reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "Отпрвьте сообщение ⬇️", reply_markup=keyboard)
 
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
@@ -51,8 +51,7 @@ def addlove(msg):
 	chanel ="Для публикации в знакомствах @love_khv необходимо:\
 \n\n• прислать Фото\
 \n• инфу О себе и контакты\
-\n• пишите одним предложением\
-\n\nОтпрвьте сообщение ⬇️"
+\n• пишите одним предложением️"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	main(msg)
 	
@@ -61,8 +60,7 @@ def addnews(msg):
 	chanel ="Для публикации в Новостях @khv_news необходимо:\
 \n\n• рассказать в подробностях что и где произошло одним-двумя предложениями\
 \n• желательно фото или видео\
-\n• реклама на платной основе\
-\n\nОтпрвьте сообщение ⬇️"
+\n• реклама на платной основе️"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	main(msg)
 
