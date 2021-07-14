@@ -85,14 +85,26 @@ def chats(msg):
 def serv(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button1 = telebot.types.InlineKeyboardButton(text="Погода", callback_data="Погода") 
-	button2 = telebot.types.InlineKeyboardButton(text="Афиша", callback_data="Афиша")
-	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости") 
-	markup.add(button1, button2,button3)
-	bot.send_message(chat_id=msg.chat.id, text="Отпрвьте сообщение ️", reply_markup=markup)
+	button2 = telebot.types.InlineKeyboardButton(text="Кино", callback_data="Кино")
+	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости")
+	button4 = telebot.types.InlineKeyboardButton(text="Клубы", callback_data="Клубы") 
+	markup.add(button3, button1, button2, button4)
+	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
+	a = datetime.datetime.today()
 	if call.data == "Погода":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/weather.html?{datetime.datetime.today()}'>🌡</a>", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/weather.html?{a}'>🌡</a>", parse_mode="HTML")
+		
+	if call.data == "Новости":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/rss.html?{a}'>📰</a>", parse_mode="HTML")
+		
+	if call.data == "Кино":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cinema.html?{a}'>📰</a>", parse_mode="HTML")
+	if call.data == "Клубы":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
+		
+		
 
 @bot.message_handler(commands=["s"])
 def send(msg):
