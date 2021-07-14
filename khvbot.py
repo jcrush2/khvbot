@@ -10,14 +10,17 @@ import peewee as pw
 import telebot
 
 from database import Users
-import logging
+from logger import main_log
 import config
+
+main_log.info("Program starting")
 
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
 @bot.message_handler(commands=["start"])
 def start(msg):
+	main_log.info("Starting func 'start'")
 
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
 	
