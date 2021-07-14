@@ -10,23 +10,13 @@ import peewee as pw
 import telebot
 
 from database import Users
-from logger import main_log
-from telebot import types
 import config
 
-main_log.info("Program starting")
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
-
-
 @bot.message_handler(commands=["start"])
 def start(msg):
-	main_log.info("Starting func 'start'")
-	"""
-	Функция для ответа на сообщение-команду для приветствия пользователя.
-	:param msg: Объект сообщения-команды
-	"""
 	reply_text = (
 			"Здравствуйте, я бот, который отвечает за " +
 			" подсчет кармы в чате @khvchat.")
@@ -47,7 +37,6 @@ def start(msg):
 
 @bot.message_handler(commands=["help"])
 def helps(msg):
-	
 	chanel ="Чтобы попасть в каталог необходимо:\
 \n\n• иметь не менее 50-100 подписчиков\
 \n• прислать публичный адрес (типа @khv_news) сюда: @khv_robot\
@@ -58,7 +47,6 @@ def helps(msg):
 
 @bot.message_handler(commands=["channels"])
 def channels(msg):
-
 	chanel = "<b>• Новости</b>\
 \n\n@khv_news - куда сходить, актуальные новости, и общение в Хабаровске⭐\
 \n\n@truehabarovsk - Хабаровские тёрки - политика, происшествия, картина дня\
@@ -81,7 +69,6 @@ def channels(msg):
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
-	
 	chanel = "• <b>Общение</b>\
 \n\n@khvchat - самый крупный чат Хабаровска⭐️\
 \n\n@dvchat - Чат Дальнего Востока\
@@ -101,7 +88,6 @@ def chats(msg):
 
 @bot.message_handler(commands=["bots"])
 def bots(msg):
-	
 	chanel = "•<b> Боты</b>\
 \n\n@khvbot - каталог каналов, чатов и ботов Хабаровска⭐️\
 \n\n@moder_khvbot - модератор на защите чата Хабаровска @khvchat \
@@ -111,7 +97,6 @@ def bots(msg):
 
 @bot.message_handler(commands=["s"])
 def send(msg):
-	main_log.info("Starting func 'send'")
 	if msg.from_user.id not in config.gods:
 		return
 	if len(msg.text.split()) == 1:
@@ -129,18 +114,21 @@ def send(msg):
 			
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
-
 	new_user = Users.create(
 				userid=user.id)
 	new_user.save()
 	
-		
-		
 
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
-
+	
+	if msg.chat.id == TO_CHAT_ID:
+		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
+		bot.send_message(TO_CHAT_ID, msg.text, parse_mode="HTML")
+	else:
+		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
+		bot.send_message(msg.chat.id, f"{msg.from_user.first_name}  Bla Bla Bla Bla", parse_mode="HTML")
 		
 	if msg.text == "🔈 Каналы":
 		channels(msg)
@@ -155,12 +143,7 @@ def all_messages(msg):
 		helps(msg)
 		return
  
-	if msg.chat.id == TO_CHAT_ID:
-		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
-		bot.send_message(TO_CHAT_ID, msg.text, parse_mode="HTML")
-	else:
-		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
-		bot.send_message(msg.chat.id, f"{msg.from_user.first_name}  Bla Bla Bla Bla", parse_mode="HTML")
+
         
 	"""	
 def is_subscribed(chat_id, user_id):
