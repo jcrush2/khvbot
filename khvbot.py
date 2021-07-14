@@ -42,10 +42,10 @@ def cat(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	servis = telebot.types.KeyboardButton(text="Сeрвисы")
+	servis = telebot.types.KeyboardButton(text="🔘 Сервисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
-	loveadd = telebot.types.KeyboardButton(text="Знакомствa")
+	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
 	keyboard.add(servis, cat, loveadd,newsadd)
 	bot.send_message(msg.chat.id, reply_markup=keyboard)
 
@@ -122,14 +122,14 @@ def chats(msg):
 \n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
-@bot.message_handler(commands=["bots"])
-def bots(msg):
-	chanel = "•<b> Боты</b>\
-\n\n@khvbot - каталог каналов, чатов и ботов Хабаровска⭐️\
-\n\n@moder_khvbot - модератор на защите чата Хабаровска @khvchat \
-\n\n@uslugi27Bot - госуслуги Хабаровского края\
-\n\n@botvacc27bot - все о вакцинации в Хабаровском крае"
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+@bot.message_handler(commands=["serv"])
+def serv(msg):
+	markup = telebot.types.InlineKeyboardMarkup()
+	button = telebot.types.InlineKeyboardButton(text='Погода', callback_data=idmy)
+	button3 = telebot.types.InlineKeyboardButton(text='Афиша', callback_data=idmy3)
+	button2 = telebot.types.InlineKeyboardButton(text='Новости', callback_data=idmy2)
+	markup.add(button,button2,button3)
+	msg_id = bot.send_message(chat_id=msg.chat.id, text=f'Сервисы', reply_markup=markup).message_id
 
 @bot.message_handler(commands=["s"])
 def send(msg):
@@ -165,10 +165,10 @@ def all_messages(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "Сeрвисы":
+	if msg.text == "🔘 Сервисы":
 		helps(msg)
 		return
-	if msg.text == "Знакомствa":
+	if msg.text == "❤️ Любовь":
 		addlove(msg)
 		return
 	if msg.text == "📂️ Группы":
