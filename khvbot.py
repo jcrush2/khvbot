@@ -33,7 +33,7 @@ def start(msg):
 	addnews = types.KeyboardButton(text="☑️ Прислать новость")
 	addlove = types.KeyboardButton(text="☑️ Знакомства")
 	keyboard.add(chanel, chats,bots,addnews,addcat,addlove)
-	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет! Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "Выберите на кнопках ниже ⤵️", reply_markup=keyboard)
 	
 	main_log.info("Starting func 'select'")
     
