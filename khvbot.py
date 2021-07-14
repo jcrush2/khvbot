@@ -24,9 +24,7 @@ def start(msg):
 	chats = types.KeyboardButton(text="💬 Чаты")
 	bots = types.KeyboardButton(text="🔘 Боты")
 	addcat = types.KeyboardButton(text="Добавить в каталог")
-	addnews = types.KeyboardButton(text="Прислать новость")
-	addlove = types.KeyboardButton(text="Знакомства")
-	keyboard.add(chanel, chats,bots,addnews,addcat,addlove)
+	keyboard.add(chanel, chats, bots, addcat)
 	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
     
 	selected_user = Users.select().where(
