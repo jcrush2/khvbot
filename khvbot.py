@@ -23,11 +23,11 @@ def start(msg):
 	main_log.info("Starting func 'start'")
 
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото, знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
-    
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
 	if not selected_user:
 		insert_user(msg.from_user)
+	main(msg)
 		
 @bot.message_handler(commands=["cat"])
 def cat(msg):
@@ -35,16 +35,16 @@ def cat(msg):
 	chanel = telebot.types.KeyboardButton(text="🔈 Каналы")
 	chats = telebot.types.KeyboardButton(text="💬 Чаты")
 	bots = telebot.types.KeyboardButton(text="🔘 Боты")
-	addcat = telebot.types.KeyboardButton(text="☑️ Добавить в каталог")
-	maingo = telebot.types.KeyboardButton(text="☑️ Меню")
+	addcat = telebot.types.KeyboardButton(text="Добавить в каталог!")
+	maingo = telebot.types.KeyboardButton(text="Меню")
 	keyboard.add(chanel, chats, bots, addcat, maingo)
 	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты ⤵️", reply_markup=keyboard)
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	newsadd = telebot.types.KeyboardButton(text="☑ Прислать новость")
-	cat = telebot.types.KeyboardButton(text="☑️ Каталог")
-	loveadd = telebot.types.KeyboardButton(text="☑️ Знакомства")
+	newsadd = telebot.types.KeyboardButton(text="Прислать новость!")
+	cat = telebot.types.KeyboardButton(text="📂️ Каталог")
+	loveadd = telebot.types.KeyboardButton(text="Знакомства.")
 	keyboard.add(newsadd, cat, loveadd)
 	bot.send_message(msg.chat.id, "Выберите сервис ниже ⤵️", reply_markup=keyboard)
 
@@ -164,22 +164,24 @@ def all_messages(msg):
 	if msg.text == "🔘 Боты":
 		bots(msg)
 		return
-	if msg.text == "☑️ Прислать новость":
+	if msg.text == "Прислать новость!":
 		addnews(msg)
 		return
-	if msg.text == "☑️ Добавить в каталог":
+	if msg.text == "Добавить в каталог!":
 		helps(msg)
 		return
-	if msg.text == "☑️ Знакомства":
+	if msg.text == "Знакомства.":
 		addlove(msg)
 		return
-	if msg.text == "☑️ Каталог":
+	if msg.text == "📂️ Каталог":
 		cat(msg)
 		return
-	if msg.text == "☑️ Меню":
+	if msg.text == "Меню":
 		main(msg)
 		return
- 
+
+	
+	
 	if msg.chat.id == TO_CHAT_ID:
 		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
 		bot.send_message(TO_CHAT_ID, "отправлено")
