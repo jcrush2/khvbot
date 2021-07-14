@@ -23,6 +23,7 @@ def start(msg):
 	main_log.info("Starting func 'start'")
 
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
+	main_log.info("Starting func 'bottom'")
 	
 	keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True)
 	chanel = types.KeyboardButton(text="🔈 Каналы")
@@ -33,11 +34,19 @@ def start(msg):
 	addlove = types.KeyboardButton(text="☑️ Знакомства")
 	keyboard.add(chanel, chats,bots,addnews,addcat,addlove)
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет! Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
+	
+	main_log.info("Starting func 'select'")
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
 	if not selected_user:
 		insert_user(msg.from_user)
+
+def insert_user(user):
+	main_log.info("Starting func 'insert_user'")
+	new_user = Users.create(
+				userid=user.id)
+	new_user.save()
 
 @bot.message_handler(commands=["help"])
 def helps(msg):
@@ -134,12 +143,6 @@ def send(msg):
 		except:
 			continue
 
-			
-def insert_user(user):
-	main_log.info("Starting func 'insert_user'")
-	new_user = Users.create(
-				userid=user.id)
-	new_user.save()
 	
 
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
