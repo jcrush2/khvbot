@@ -155,7 +155,7 @@ def all_messages(msg):
 		helps(msg)
 		return
  
-	if int(msg.chat.id) == TO_CHAT_ID:
+	if msg.chat.id == TO_CHAT_ID:
 		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
 		bot.send_message(TO_CHAT_ID, msg.text, parse_mode="HTML")
 	else:
