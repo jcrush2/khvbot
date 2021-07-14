@@ -92,7 +92,7 @@ def serv(msg):
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
 	if call.data == "Погода":
-		bot.send_message(call.message.chat.id, 'тепло там')
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/weather.html?{datetime.datetime.today()}'>🌡</a>", parse_mode="HTML")
 
 @bot.message_handler(commands=["s"])
 def send(msg):
