@@ -38,7 +38,7 @@ def cat(msg):
 	addcat = telebot.types.KeyboardButton(text="Добавить в каталог!")
 	maingo = telebot.types.KeyboardButton(text="Меню")
 	keyboard.add(chanel, chats, bots, addcat, maingo)
-	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты ⤵️", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты️", reply_markup=keyboard)
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -46,7 +46,7 @@ def main(msg):
 	cat = telebot.types.KeyboardButton(text="📂️ Каталог")
 	loveadd = telebot.types.KeyboardButton(text="Знакомства.")
 	keyboard.add(newsadd, cat, loveadd)
-	bot.send_message(msg.chat.id, "Выберите сервис ниже ⤵️", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "⤵️", reply_markup=keyboard)
 
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
@@ -63,7 +63,6 @@ def helps(msg):
 \n• необходимо Рассказать о нашем боте в своем канале\группе\
 \n\nСпасибо!"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	main(msg)
 
 @bot.message_handler(commands=["love"])
 def addlove(msg):
@@ -107,7 +106,6 @@ def channels(msg):
 \n\n@sky_khv - Фитнес-клуб Sky - тренировки, расписания, акции\
 \n\n@hbk_market - барахолка Хабаровска"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	cat(msg)
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
@@ -127,7 +125,6 @@ def chats(msg):
 \n\n@freetaxi_hbk - Подвезу бесплатно ХБК - помощь в передвижении по Хабаровску\
 \n\n@game_pub - Чат посвященный играм и всему что с ними связано"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	cat(msg)
 
 @bot.message_handler(commands=["bots"])
 def bots(msg):
@@ -137,7 +134,6 @@ def bots(msg):
 \n\n@uslugi27Bot - госуслуги Хабаровского края\
 \n\n@botvacc27bot - все о вакцинации в Хабаровском крае"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	cat(msg)
 
 @bot.message_handler(commands=["s"])
 def send(msg):
