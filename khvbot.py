@@ -83,10 +83,10 @@ def chats(msg):
 
 @bot.message_handler(commands=["serv"])
 def serv(msg):
-	markup = types.InlineKeyboardMarkup()
-	button1 = types.InlineKeyboardButton(text="Погода", callback_data="Погода") 
-	button2 = types.InlineKeyboardButton(text="Афиша", callback_data="Афиша")
-	button3 = types.InlineKeyboardButton(text="Новости", callback_data="Новости") 
+	markup = telebot.types.InlineKeyboardMarkup()
+	button1 = telebot.types.InlineKeyboardButton(text="Погода", callback_data="Погода") 
+	button2 = telebot.types.InlineKeyboardButton(text="Афиша", callback_data="Афиша")
+	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости") 
 	markup.add(button1, button2,button3)
 	bot.send_message(chat_id=msg.chat.id, text="Отпрвьте сообщение ️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
