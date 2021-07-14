@@ -88,7 +88,7 @@ def serv(msg):
 	button3 = telebot.types.InlineKeyboardButton(text='Афиша', callback_data=idmy3)
 	button2 = telebot.types.InlineKeyboardButton(text='Новости', callback_data=idmy2)
 	markup.add(button,button2,button3)
-	msg_id = bot.send_message(chat_id=msg.chat.id, text=f'Сервисы', reply_markup=markup).message_id
+	bot.send_message(msg.chat.id, "Отпрвьте сообщение ⬇️", reply_markup=markup)
 
 @bot.message_handler(commands=["s"])
 def send(msg):
