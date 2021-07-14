@@ -63,6 +63,7 @@ def helps(msg):
 \n• необходимо Рассказать о нашем боте в своем канале\группе\
 \n\nСпасибо!"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
 
 @bot.message_handler(commands=["love"])
 def addlove(msg):
@@ -73,6 +74,7 @@ def addlove(msg):
 \n• необходимо прислать всю информацию одним предложением\
 \n\nСпасибо!"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
 	
 @bot.message_handler(commands=["news"])
 def addnews(msg):
@@ -82,6 +84,7 @@ def addnews(msg):
 \n• коммерческая или агитационная реклама возможна на платной основе\
 \n\nСпасибо!"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
 
 @bot.message_handler(commands=["channels"])
 def channels(msg):
@@ -104,6 +107,7 @@ def channels(msg):
 \n\n@sky_khv - Фитнес-клуб Sky - тренировки, расписания, акции\
 \n\n@hbk_market - барахолка Хабаровска"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	cat(msg)
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
@@ -123,6 +127,7 @@ def chats(msg):
 \n\n@freetaxi_hbk - Подвезу бесплатно ХБК - помощь в передвижении по Хабаровску\
 \n\n@game_pub - Чат посвященный играм и всему что с ними связано"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	cat(msg)
 
 @bot.message_handler(commands=["bots"])
 def bots(msg):
@@ -132,6 +137,7 @@ def bots(msg):
 \n\n@uslugi27Bot - госуслуги Хабаровского края\
 \n\n@botvacc27bot - все о вакцинации в Хабаровском крае"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	cat(msg)
 
 @bot.message_handler(commands=["s"])
 def send(msg):
