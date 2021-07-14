@@ -26,7 +26,7 @@ def start(msg):
 	addcat = types.KeyboardButton(text="☑️ Добавить в каталог")
 	addnews = types.KeyboardButton(text="☑️ Прислать новость")
 	addlove = types.KeyboardButton(text="☑️ Знакомства")
-	keyboard.add(chanel, chats,bots)
+	keyboard.add(chanel, chats,bots,addnews,addcat,addlove)
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет! Хабаровские каналы, чаты и боты. Выберите рубрику на кнопках ниже ⤵️", reply_markup=keyboard)
     
 	selected_user = Users.select().where(
@@ -45,7 +45,7 @@ def helps(msg):
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
 @bot.message_handler(commands=["love"])
-def love(msg):
+def addlove(msg):
 	chanel ="Для публикации в знакомствах @love_khv необходимо:\
 \n\n• прислать Фото\
 \n• написать инфу О себе\
@@ -55,7 +55,7 @@ def love(msg):
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	
 @bot.message_handler(commands=["news"])
-def news(msg):
+def addnews(msg):
 	chanel ="Для публикации в Новостях @khv_news необходимо:\
 \n\n• рассказать в подробностях что и где произошло одним предложением\
 \n• желательно прислать фото или видео\
@@ -151,13 +151,13 @@ def all_messages(msg):
 		bots(msg)
 		return
 	if msg.text == "☑️ Прислать новость":
-		helps(msg)
+		addnews(msg)
 		return
 	if msg.text == "☑️ Добавить в каталог":
 		helps(msg)
 		return
 	if msg.text == "☑️ Знакомства":
-		helps(msg)
+		addlove(msg)
 		return
  
 	if msg.chat.id == TO_CHAT_ID:
