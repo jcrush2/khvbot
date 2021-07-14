@@ -23,24 +23,30 @@ def start(msg):
 	main_log.info("Starting func 'start'")
 
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
-	main_log.info("Starting func 'bottom'")
+
 	
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	chanel = telebot.types.KeyboardButton(text="🔈 Каналы")
-	chats = telebot.types.KeyboardButton(text="💬 Чаты")
-	bots = telebot.types.KeyboardButton(text="🔘 Боты")
-	cat = telebot.types.KeyboardButton(text="☑️ Добавить в каталог")
-	newsadd = telebot.types.KeyboardButton(text="☑️ Прислать новость")
+	newsadd = telebot.types.KeyboardButton(text="☑ Прислать новость")
+	cat = telebot.types.KeyboardButton(text="☑️ Каталог")
 	loveadd = telebot.types.KeyboardButton(text="☑️ Знакомства")
-	keyboard.add(chanel, chats, bots, newsadd, cat, loveadd)
-	bot.send_message(msg.chat.id, "Выберите на кнопках ниже ⤵️", reply_markup=keyboard)
+	keyboard.add(newsadd, cat, loveadd)
+	bot.send_message(msg.chat.id, "Выберите сервис ниже ⤵️", reply_markup=keyboard)
 	
-	main_log.info("Starting func 'select'")
     
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
 	if not selected_user:
 		insert_user(msg.from_user)
+		
+@bot.message_handler(commands=["cat"])
+def cat(msg):
+	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+	chanel = telebot.types.KeyboardButton(text="🔈 Каналы")
+	chats = telebot.types.KeyboardButton(text="💬 Чаты")
+	bots = telebot.types.KeyboardButton(text="🔘 Боты")
+	addcat = telebot.types.KeyboardButton(text="☑️ Добавить в каталог")
+	keyboard.add(chanel, chats, bots, addcat)
+	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты ⤵️", reply_markup=keyboard)
 
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
@@ -166,6 +172,9 @@ def all_messages(msg):
 		return
 	if msg.text == "☑️ Знакомства":
 		addlove(msg)
+		return
+	if msg.text == "☑️ Каталог":
+		cat(msg)
 		return
  
 	if msg.chat.id == TO_CHAT_ID:
