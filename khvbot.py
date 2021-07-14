@@ -47,7 +47,7 @@ def main(msg):
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="Знакомствa")
 	keyboard.add(servis, cat, loveadd,newsadd)
-	bot.send_message(msg.chat.id, "⤵️", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, reply_markup=keyboard)
 
 def insert_user(user):
 	main_log.info("Starting func 'insert_user'")
@@ -173,7 +173,7 @@ def all_messages(msg):
 		addlove(msg)
 		return
 	if msg.text == "📂️ Группы":
-		cat(msg)
+		chats(msg)
 		return
 	if msg.text == "Меню":
 		main(msg)
