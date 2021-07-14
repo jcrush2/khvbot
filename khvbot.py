@@ -32,11 +32,11 @@ def start(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	servis = telebot.types.KeyboardButton(text="🔘 Сервисы")
+	servise = telebot.types.KeyboardButton(text="🔘 Сервисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
-	keyboard.add(servis, cat, loveadd,newsadd)
+	keyboard.add(servise, cat, loveadd, newsadd)
 	bot.send_message(msg.chat.id, reply_markup=keyboard)
 
 def insert_user(user):
