@@ -42,7 +42,7 @@ def cat(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	servis = telebot.types.KeyboardButton(text="Сервисы")
+	servis = telebot.types.KeyboardButton(text="Сeрвисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="Знакомствa")
@@ -163,10 +163,10 @@ def all_messages(msg):
 	if msg.text == "🔘 Боты":
 		bots(msg)
 		return
-	if msg.text == "Прислaть новость!":
+	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "Добавить в каталог!":
+	if msg.text == "Сeрвисы":
 		helps(msg)
 		return
 	if msg.text == "Знакомствa":
