@@ -138,10 +138,10 @@ def all_messages(msg):
  
 	if int(msg.chat.id) == TO_CHAT_ID:
 		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
-		bot.send_message(TO_CHAT_ID, msg.text)
+		bot.send_message(TO_CHAT_ID, text)
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
-		bot.send_message(msg.chat.id, f"{msg.from_user.first_name}  Bla Bla Bla Bla")
+		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
         
 	"""	
 def is_subscribed(chat_id, user_id):
