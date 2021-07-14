@@ -122,13 +122,6 @@ def insert_user(user):
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
-	
-	if msg.chat.id == -542531596:
-		bot.forward_message(msg.reply_to_message.forward_from.id, -542531596, msg.text)
-		bot.send_message(-542531596, msg.text, parse_mode="HTML")
-	else:
-		bot.forward_message(-542531596, msg.chat.id, msg.message_id)
-		bot.send_message(msg.chat.id, f"{msg.from_user.first_name}  Bla Bla Bla Bla", parse_mode="HTML")
 		
 	if msg.text == "🔈 Каналы":
 		channels(msg)
@@ -143,7 +136,12 @@ def all_messages(msg):
 		helps(msg)
 		return
  
-
+	if msg.chat.id == TO_CHAT_ID:
+		bot.forward_message(msg.reply_to_message.forward_from.id, TO_CHAT_ID, msg.text)
+		bot.send_message(TO_CHAT_ID, "sdfdsfd", parse_mode="HTML")
+	else:
+		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
+		bot.send_message(msg.chat.id, f"{msg.from_user.first_name}  Bla Bla Bla Bla", parse_mode="HTML")
         
 	"""	
 def is_subscribed(chat_id, user_id):
