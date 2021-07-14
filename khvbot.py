@@ -29,16 +29,6 @@ def start(msg):
 		insert_user(msg.from_user)
 	main(msg)
 		
-@bot.message_handler(commands=["cat"])
-def cat(msg):
-	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	chanel = telebot.types.KeyboardButton(text="🔈 Каналы")
-	chats = telebot.types.KeyboardButton(text="💬 Чаты")
-	bots = telebot.types.KeyboardButton(text="🔘 Боты")
-	addcat = telebot.types.KeyboardButton(text="Добавить в каталог!")
-	maingo = telebot.types.KeyboardButton(text="Меню")
-	keyboard.add(chanel, chats, bots, addcat, maingo)
-	bot.send_message(msg.chat.id, "Хабаровские каналы, чаты и боты️", reply_markup=keyboard)
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -55,15 +45,6 @@ def insert_user(user):
 				userid=user.id)
 	new_user.save()
 
-@bot.message_handler(commands=["help"])
-def helps(msg):
-	chanel ="Чтобы попасть в каталог @khvbot необходимо:\
-\n\n• иметь не менее 70-100 подписчиков\
-\n• прислать публичный адрес (пример @khv_news)\
-\n• принимаются только тематики явно связанные с Хабаровском\
-\n• необходимо Рассказать о нашем боте в своем канале\группе\
-\n\nОтпрвьте сообщение ⬇️"
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
 @bot.message_handler(commands=["love"])
 def addlove(msg):
@@ -85,27 +66,6 @@ def addnews(msg):
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	main(msg)
 
-@bot.message_handler(commands=["channels"])
-def channels(msg):
-	chanel = "<b>• Новости</b>\
-\n\n@khv_news - куда сходить, актуальные новости, и общение в Хабаровске⭐\
-\n\n@truehabarovsk - Хабаровские тёрки - политика, происшествия, картина дня\
-\n\n@amurmedianews - быстрые, свежие и разные новости Хабаровска и Хабаровского края\
-\n\n@khabarovsktg - новостной канал, своевременно и без воды, погода, пробки и курс валют\
-\n\n@sminych - точка зрения хабаровского журналиста Сергея Мингазова\
-\n\n@nedebri - околополитическая жизнь Дальнего Востока\
-\n\n@korifeyhab - политический канал Хабаровского края\
-\n\n@t_khabarovsk - типичный Хабаровск, народные новости нашего городка, в лучших традициях\
-\n\n@vehernij_habarovsk - вечерний Хабаровск\
-\n\n@guberniaonline - Губерния - новости и культурные события в Хабаровске\
-\n\n@newskhv - новости о которых говорит весь город, самое интересное и актуальное\
-\n\n<b>• Разное</b>\
-\n\n@love_khv - знакомства в Хабаровске⭐️\
-\n\n@j_crush - иногда заметки о Хабаровске\
-\n\n@khabara_ru - Объявления Хабаровск\
-\n\n@sky_khv - Фитнес-клуб Sky - тренировки, расписания, акции\
-\n\n@hbk_market - барахолка Хабаровска"
-	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
@@ -121,6 +81,7 @@ def chats(msg):
 \n\n@khabara_ru - объявления Хабаровск\
 \n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
 
 @bot.message_handler(commands=["serv"])
 def serv(msg):
@@ -153,20 +114,11 @@ def send(msg):
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
 		
-	if msg.text == "🔈 Каналы":
-		channels(msg)
-		return
-	if msg.text == "💬 Чаты":
-		chats(msg)
-		return
-	if msg.text == "🔘 Боты":
-		bots(msg)
-		return
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
 	if msg.text == "🔘 Сервисы":
-		helps(msg)
+		serv(msg)
 		return
 	if msg.text == "❤️ Любовь":
 		addlove(msg)
@@ -174,11 +126,7 @@ def all_messages(msg):
 	if msg.text == "📂️ Группы":
 		chats(msg)
 		return
-	if msg.text == "Меню":
-		main(msg)
-		return
 
-	
 	
 	if msg.chat.id == TO_CHAT_ID:
 		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
