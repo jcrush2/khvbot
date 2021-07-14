@@ -35,7 +35,7 @@ def main(msg):
 	servise = telebot.types.KeyboardButton(text="🔘 Сервисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
-	loveadd = telebot.types.KeyboardButton(text="❤ Любовь")
+	loveadd = telebot.types.KeyboardButton(text="Любовь")
 	keyboard.add(servise, cat, loveadd, newsadd)
 	bot.send_message(msg.chat.id, reply_markup=keyboard)
 
