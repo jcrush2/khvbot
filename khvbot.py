@@ -102,7 +102,7 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/weather.html?{a}'>🌡</a>", parse_mode="HTML")
 		
 	if call.data == "Новости":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/rss.html?{a}'>📰</a>", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/onlinetv.html?{a}'>📰</a>", parse_mode="HTML")
 		
 	if call.data == "Кино":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cinema.html?{a}'>📰</a>", parse_mode="HTML")
