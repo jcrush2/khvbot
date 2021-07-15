@@ -18,6 +18,8 @@ main_log.info("Program starting")
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
+reklama_post = "Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама.\n\n Сообщением пришлите картинку, пост и желаемое время публикации. \n\n Для связи по рекламе: @jcrush"
+
 @bot.message_handler(commands=["start"])
 def start(msg):
 	main_log.info("Starting func 'start'")
@@ -78,6 +80,10 @@ def chats(msg):
 \n\n@khabara_ru - объявления Хабаровск\
 \n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	
+@bot.message_handler(commands=["reklama"])
+def reklama(msg):
+	bot.send_message(msg.chat.id, reklama_post, parse_mode="HTML")
 
 @bot.message_handler(commands=["serv"])
 def serv(msg):
@@ -103,7 +109,7 @@ def longname(call):
 	if call.data == "Клубы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Реклама":
-		bot.send_message(call.message.chat.id, f"Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама.\n\n Сообщением пришлите картинку, пост и желаемое время публикации. \n\n Для связи по рекламе: @jcrush", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
 		
 
 @bot.message_handler(commands=["s"])
