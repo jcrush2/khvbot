@@ -101,15 +101,15 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/onlinetv.html?{a}'>📰</a>", parse_mode="HTML")
 		
 	if call.data == "Кино":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cinema.html?{a}'>📰</a>", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cinema.html?{a}'>🎦</a>", parse_mode="HTML")
 	if call.data == "Клубы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Фонтаны":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>💃</a>", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>⛲️</a>", parse_mode="HTML")
 	if call.data == "Достопримечательности":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/152564-khv.html?{a}'>💃</a>", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/152564-khv.html?{a}'>🎡</a>", parse_mode="HTML")
 	if call.data == "Экстренные службы":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>💃</a>", parse_mode="HTML")
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>⚠️</a>", parse_mode="HTML")
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
 		
