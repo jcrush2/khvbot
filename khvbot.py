@@ -11,8 +11,6 @@ import telebot
 from database import Users
 import config
 
-main_log.info("Program starting")
-
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
