@@ -148,7 +148,8 @@ def all_messages(msg):
 		return
 
 	if msg.chat.id == TO_CHAT_ID:
-		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
+#		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
+		bot.copyMessage(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
 		bot.send_message(TO_CHAT_ID, "отправлено")
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
