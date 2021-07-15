@@ -3,14 +3,12 @@ import datetime
 import hashlib
 import string
 import os
-import time
 
 from flask import Flask, request
 import peewee as pw
 import telebot
 
 from database import Users
-from logger import main_log
 import config
 
 main_log.info("Program starting")
@@ -34,7 +32,7 @@ def start(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
-	servise = telebot.types.KeyboardButton(text="🔘 Сервисы")
+	servise = telebot.types.KeyboardButton(text="ℹ️ Сервисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
@@ -46,7 +44,6 @@ def insert_user(user):
 	new_user = Users.create(
 				userid=user.id)
 	new_user.save()
-
 
 @bot.message_handler(commands=["love"])
 def addlove(msg):
@@ -128,8 +125,6 @@ def send(msg):
 		except:
 			continue
 
-	
-
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
@@ -137,7 +132,7 @@ def all_messages(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "🔘 Сервисы":
+	if msg.text == "ℹ️ Сервисы":
 		serv(msg)
 		return
 	if msg.text == "❤️ Любовь":
@@ -147,7 +142,6 @@ def all_messages(msg):
 		chats(msg)
 		return
 
-	
 	if msg.chat.id == TO_CHAT_ID:
 		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
 		bot.send_message(TO_CHAT_ID, "отправлено")
@@ -156,26 +150,7 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 
-        
-	"""	
-def is_subscribed(chat_id, user_id):
-    try:
-        bot.get_chat_member(chat_id, user_id)
-        return True
-    except ApiTelegramException as e:
-        if e.result_json['description'] == 'Bad Request: user not found':
-            return False
-
-if not is_subscribed(CHAT_ID, USER_ID):
-    # user is not subscribed. send message to the user
-    bot.send_message(CHAT_ID, 'Please subscribe to the channel')
-else:
-    # user is subscribed. continue with the rest of the logic
-    # ...
-"""
-
 # bot.polling(none_stop=True)
-
 
 # Дальнейший код используется для установки и удаления вебхуков
 server = Flask(__name__)
