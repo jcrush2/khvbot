@@ -53,7 +53,6 @@ def addlove(msg):
 \n• инфу О себе и контакты\
 \n• пишите одним предложением️"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	main(msg)
 	
 @bot.message_handler(commands=["news"])
 def addnews(msg):
@@ -62,8 +61,6 @@ def addnews(msg):
 \n• желательно фото или видео\
 \n• реклама на платной основе️"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	main(msg)
-
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
@@ -79,17 +76,17 @@ def chats(msg):
 \n\n@khabara_ru - объявления Хабаровск\
 \n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
-	main(msg)
 
 @bot.message_handler(commands=["serv"])
 def serv(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button1 = telebot.types.InlineKeyboardButton(text="Погода", callback_data="Погода") 
 	button2 = telebot.types.InlineKeyboardButton(text="Кино", callback_data="Кино")
+	button5 = telebot.types.InlineKeyboardButton(text="Реклама", callback_data="Реклама")
 	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости")
 	button4 = telebot.types.InlineKeyboardButton(text="Клубы", callback_data="Клубы") 
-	markup.add(button3, button1, button2, button4)
-	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске️", reply_markup=markup)
+	markup.add(button3, button1,button5, button2, button4)
+	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске:️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
 	a = datetime.datetime.today()
@@ -103,7 +100,9 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cinema.html?{a}'>📰</a>", parse_mode="HTML")
 	if call.data == "Клубы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
-		
+	if call.data == "Реклама":
+		bot.send_message(call.message.chat.id, f"Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама.", parse_mode="HTML")
+		main(msg)
 		
 
 @bot.message_handler(commands=["s"])
@@ -130,12 +129,14 @@ def all_messages(msg):
 		
 	if msg.text == "Прислaть новость":
 		addnews(msg)
+		main(msg)
 		return
 	if msg.text == "🔘 Сервисы":
 		serv(msg)
 		return
 	if msg.text == "❤️ Любовь":
 		addlove(msg)
+		main(msg)
 		return
 	if msg.text == "📂️ Группы":
 		chats(msg)
@@ -148,7 +149,8 @@ def all_messages(msg):
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
-	main(msg)
+		main(msg)
+
         
 	"""	
 def is_subscribed(chat_id, user_id):
