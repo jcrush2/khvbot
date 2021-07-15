@@ -102,7 +102,7 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, f"Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама.", parse_mode="HTML")
-		main(msg)
+		main(call)
 		
 
 @bot.message_handler(commands=["s"])
