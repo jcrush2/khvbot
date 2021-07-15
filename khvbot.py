@@ -86,7 +86,10 @@ def serv(msg):
 	button5 = telebot.types.InlineKeyboardButton(text="Реклама", callback_data="Реклама")
 	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости")
 	button4 = telebot.types.InlineKeyboardButton(text="Клубы", callback_data="Клубы") 
-	markup.add(button3, button1,button5, button2, button4)
+	button6 = telebot.types.InlineKeyboardButton(text="Фонтаны", callback_data="Фонтаны")
+	button7 = telebot.types.InlineKeyboardButton(text="Достопримечательности", callback_data="Достопримечательности")
+	button8 = telebot.types.InlineKeyboardButton(text="Экстренные службы", callback_data="Экстренные службы") 
+	markup.add(button3, button1,button5, button2, button4, button6,button7,button8)
 	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске:️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
@@ -101,6 +104,12 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cinema.html?{a}'>📰</a>", parse_mode="HTML")
 	if call.data == "Клубы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
+	if call.data == "Фонтаны":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>💃</a>", parse_mode="HTML")
+	if call.data == "Достопримечательности":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/152564-khv.html?{a}'>💃</a>", parse_mode="HTML")
+	if call.data == "Экстренные службы":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
 		
