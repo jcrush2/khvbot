@@ -18,8 +18,6 @@ reklama_post = "Реклама на канале @khv_news, а также в Х�
 
 @bot.message_handler(commands=["start"])
 def start(msg):
-	main_log.info("Starting func 'start'")
-
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото, знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
