@@ -53,6 +53,7 @@ def addlove(msg):
 \n• инфу О себе и контакты\
 \n• пишите одним предложением️"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
 	
 @bot.message_handler(commands=["news"])
 def addnews(msg):
@@ -61,6 +62,7 @@ def addnews(msg):
 \n• желательно фото или видео\
 \n• реклама на платной основе️"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
 
 @bot.message_handler(commands=["chats"])
 def chats(msg):
@@ -101,8 +103,7 @@ def longname(call):
 	if call.data == "Клубы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Реклама":
-		bot.send_message(call.message.chat.id, f"Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама.", parse_mode="HTML")
-		main(call)
+		bot.send_message(call.message.chat.id, f"Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама.\n\n Сообщением пришлите картинку, пост и желаемое время публикации. \n\n Для связи по рекламе: @jcrush", parse_mode="HTML")
 		
 
 @bot.message_handler(commands=["s"])
@@ -129,14 +130,12 @@ def all_messages(msg):
 		
 	if msg.text == "Прислaть новость":
 		addnews(msg)
-		main(msg)
 		return
 	if msg.text == "🔘 Сервисы":
 		serv(msg)
 		return
 	if msg.text == "❤️ Любовь":
 		addlove(msg)
-		main(msg)
 		return
 	if msg.text == "📂️ Группы":
 		chats(msg)
