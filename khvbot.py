@@ -29,7 +29,7 @@ def main(msg):
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
 	keyboard.add(servise, cat, loveadd, newsadd)
-	bot.send_message(msg.chat.id, "Отпрвьте сообщение ⬇️", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, "Отправьте сообщение ⬇️", reply_markup=keyboard)
 	
 	selected_user = Users.select().where(
 		Users.userid == msg.from_user.id)
