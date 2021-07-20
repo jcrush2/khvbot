@@ -36,7 +36,6 @@ def main(msg):
 	bot.send_message(msg.chat.id, "Отпрвьте сообщение ⬇️", reply_markup=keyboard)
 
 def insert_user(user):
-	main_log.info("Starting func 'insert_user'")
 	new_user = Users.create(
 				userid=user.id)
 	new_user.save()
