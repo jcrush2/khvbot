@@ -19,10 +19,6 @@ reklama_post = "Реклама на канале @khv_news, а также в Х�
 @bot.message_handler(commands=["start"])
 def start(msg):
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото, знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
-	selected_user = Users.select().where(
-		Users.userid == msg.from_user.id)
-	if not selected_user:
-		insert_user(msg.from_user)
 	main(msg)
 		
 @bot.message_handler(commands=["main"])
@@ -34,6 +30,11 @@ def main(msg):
 	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
 	keyboard.add(servise, cat, loveadd, newsadd)
 	bot.send_message(msg.chat.id, "Отпрвьте сообщение ⬇️", reply_markup=keyboard)
+	
+	selected_user = Users.select().where(
+		Users.userid == msg.from_user.id)
+	if not selected_user:
+		insert_user(msg.from_user)
 
 def insert_user(user):
 	new_user = Users.create(
