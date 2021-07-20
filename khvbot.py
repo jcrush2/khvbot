@@ -113,7 +113,13 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>⚠️</a>", parse_mode="HTML")
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
-		
+
+@bot.message_handler(commands=["stat"])
+def stat(msg):
+	if msg.from_user.id not in config.gods:
+		return
+	count = Users.select().count()
+	bot.send_message(msg.chat.id, count, parse_mode="HTML")
 
 @bot.message_handler(commands=["s"])
 def send(msg):
