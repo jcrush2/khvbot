@@ -59,7 +59,7 @@ def addnews(msg):
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	main(msg)
 
-@bot.message_handler(commands=["chats"])
+@bot.message_handler(commands=["chats","bots","channels"])
 def chats(msg):
 	chanel = "🤖 Бот Хабаровска @khvbot\
 \n\n• <b>Чаты и группы Хабаровска</b>\
@@ -79,7 +79,7 @@ def chats(msg):
 def reklama(msg):
 	bot.send_message(msg.chat.id, reklama_post, parse_mode="HTML")
 
-@bot.message_handler(commands=["serv"])
+@bot.message_handler(commands=["serv","help"])
 def serv(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button1 = telebot.types.InlineKeyboardButton(text="Погода", callback_data="Погода") 
