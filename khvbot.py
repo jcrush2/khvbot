@@ -30,7 +30,7 @@ def a(msg):
 		
 		url = "https://api.travelpayouts.com/v1/prices/cheap"
 		a = datetime.datetime.now().strftime("%Y-%m")
-		querystring = {"origin":"KHV","destination":"-","depart_date":f"{a}"}
+		querystring = {"origin":"KHV","depart_date":f"{a}"}
 		headers = {'x-access-token': '83a5fe66f97a36e6f0be4b2be21a5552'}
 		response = requests.request("GET", url, headers=headers, params=querystring)
 		data = response.json()
