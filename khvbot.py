@@ -4,6 +4,9 @@ import hashlib
 import string
 import os
 
+import requests
+import json
+
 from flask import Flask, request
 import peewee as pw
 import telebot
@@ -20,6 +23,19 @@ reklama_post = "Реклама на канале @khv_news, а также в Х�
 def start(msg):
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото, знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
 	main(msg)
+	
+@bot.message_handler(commands=["a"])
+def a(msg):
+	url = "http://min-prices.aviasales.ru/calendar_preload"
+	querystring = {"origin":"MOW","destination":"HKT","depart_date":"2021-07","return_date":"2021-29"}
+	headers = {'x-access-token': '83a5fe66f97a36e6f0be4b2be21a5552'}
+	response = requests.request("GET", url, headers=headers, params=querystring)
+	data = response.json()
+	HKT = data['best_prices']
+	best=sorted(prices,key=lambda k:k['value'])
+	bestfirst = best[0]
+
+	bot.send_message(msg.chat.id, f"{best} ---- {bestfirst}")
 		
 @bot.message_handler(commands=["main"])
 def main(msg):
