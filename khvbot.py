@@ -31,7 +31,7 @@ def a(msg):
 	headers = {'x-access-token': '83a5fe66f97a36e6f0be4b2be21a5552'}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	data = response.json()
-	HKT = data['best_prices']
+	prices = data['best_prices']
 	best=sorted(prices,key=lambda k:k['value'])
 	bestfirst = best[0]
 	returnfly=min(bestfirst,key=itemgetter('return_date'))
