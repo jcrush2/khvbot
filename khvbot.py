@@ -27,16 +27,16 @@ def start(msg):
 @bot.message_handler(commands=["a"])
 def a(msg):
 	url = "http://min-prices.aviasales.ru/calendar_preload"
-	querystring = {"origin":"MOW","destination":"HKT","depart_date":"2021-07-26","return_date":"2021-08-11"}
+	querystring = {"origin":"KHV","destination":"HKT","depart_date":"2021-07-26","return_date":"2021-08-11"}
 	headers = {'x-access-token': '83a5fe66f97a36e6f0be4b2be21a5552'}
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	data = response.json()
 	prices = data['best_prices']
 	best=sorted(prices,key=lambda k:k['value'])
 	bestfirst = best[0]
-	returnfly=min(bestfirst,key=itemgetter('return_date'))
+#	returnfly=min(bestfirst,key=itemgetter('return_date'))
 
-	bot.send_message(msg.chat.id, f"{best} ---- {bestfirst} --- {returnfly}")
+	bot.send_message(msg.chat.id, f"{best} ---- {bestfirst} --- ")
 		
 @bot.message_handler(commands=["main"])
 def main(msg):
