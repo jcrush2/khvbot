@@ -32,11 +32,11 @@ def a(msg):
 	response = requests.request("GET", url, headers=headers, params=querystring)
 	data = response.json()
 	prices = data['best_prices']
-	best=sorted(prices,key=lambda k:k['value'])
+	best=sorted(prices,key=lambda k: k['value'])
 	bestfirst = best[0]
 #	returnfly=min(bestfirst,key=itemgetter('return_date'))
 
-	bot.send_message(msg.chat.id, f"{best} ---- {bestfirst} --- ")
+	bot.send_message(msg.chat.id, f"{best} ")
 		
 @bot.message_handler(commands=["main"])
 def main(msg):
