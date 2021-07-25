@@ -16,13 +16,11 @@ TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
 
 reklama_post = "Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама. \n\n Сообщением пришлите картинку, пост и желаемое время публикации. \n\n Для связи по рекламе: @jcrush"
-
+    
 @bot.message_handler(commands=["start"])
 def start(msg):
 	bot.send_message(msg.chat.id, "Делитесь новостями, присылайте фото, знакомьтесь и общайтесь, а наш Бот в этом вам поможет!")
 	main(msg)
-#	msg = msg.text.split(' ')[1] 
-	all_messages(msg)
 	
 		
 @bot.message_handler(commands=["main"])
