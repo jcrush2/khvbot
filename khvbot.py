@@ -26,11 +26,12 @@ def start(msg):
 @bot.message_handler(commands=["main"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+	khvtrip = telebot.types.KeyboardButton(text="⁉️ Вопрос")
 	servise = telebot.types.KeyboardButton(text="ℹ️ Сервисы")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
-	keyboard.add(servise, cat, loveadd, newsadd)
+	keyboard.add(khvtrip, cat, loveadd, newsadd, servise)
 	bot.send_message(msg.chat.id, "Отправьте сообщение ⬇️", reply_markup=keyboard)
 	
 	selected_user = Users.select().where(
@@ -49,6 +50,11 @@ def addlove(msg):
 \n\n• прислать Фото\
 \n• инфу О себе и контакты\
 \n• пишите одним предложением️"
+	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
+	main(msg)
+	
+def khvtrip(msg):
+	chanel ="Задайте вопрос связанный с Хабаровском, а в @khvtrip постараются вам ответить."
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	main(msg)
 	
@@ -72,7 +78,8 @@ def chats(msg):
 \n\n<b>• Каналы Хабаровска</b>\
 \n\n@khv_news - куда сходить, актуальные новости Хабаровска\
 \n\n@love_khv - знакомства\
-\n\n@j_crush - заметки о Хабаровске\
+\n\n@khvtrip - знатоки Хабаровска (где, что, как: вопросы и ответы)\
+\n\n@j_crush - блог о Хабаровске\
 \n\n@khabara_ru - объявления Хабаровск\
 \n\n@stfw_ru - IT-новости"
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
@@ -155,12 +162,17 @@ def all_messages(msg):
 	if msg.text == "📂️ Группы":
 		chats(msg)
 		return
+	if msg.text == "⁉️ Вопрос":
+		khvtrip(msg)
+		return
 
 	if msg.chat.id == TO_CHAT_ID:
-		bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
-#		bot.forward_message(msg.reply_to_message.forward_from.id, msg.chat.id, msg.message_id)
-
-		bot.send_message(TO_CHAT_ID, "отправлено")
+		if msg.text.lower() == "/вопрос":
+			bot.send_message(-1001310162579,f'⁉️ {msg.reply_to_message.text}', parse_mode="HTML")
+			bot.reply_to(msg.reply_to_message,f"⁉️ Вопрос отправлен <a href='https://t.me/khvtrip'>Знатокам Хабаровска</a>", parse_mode="HTML")
+		else:
+			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
+			bot.send_message(TO_CHAT_ID, "отправлено")
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
