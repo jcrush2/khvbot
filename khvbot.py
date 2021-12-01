@@ -28,7 +28,7 @@ def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 	khvtrip = telebot.types.KeyboardButton(text="⁉️ Вопрос")
 	servise = telebot.types.KeyboardButton(text="ℹ️ Сервисы")
-	newsadd = telebot.types.KeyboardButton(text="📰 Прислaть новость")
+	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="❤️ Знакомства")
 	keyboard.add(khvtrip, cat, servise, newsadd, loveadd)
@@ -158,7 +158,7 @@ def send(msg):
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
 		
-	if msg.text == "📰 Прислaть новость":
+	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
 	if msg.text == "ℹ️ Сервисы":
