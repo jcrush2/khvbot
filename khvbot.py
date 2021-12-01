@@ -182,7 +182,7 @@ def all_messages(msg):
 			bot.send_message(TO_CHAT_ID, "отправлено")
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
-		bot.send_message(TO_CHAT_ID, f"ID {call.from_user.id}")
+		bot.send_message(TO_CHAT_ID, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a ID")
 		
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
