@@ -54,7 +54,6 @@ def addlove(msg):
 	button = telebot.types.InlineKeyboardButton(text="❌ Удалить анекту", callback_data="delete") 
 	markup.add(button)
 	bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
-#	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
 	main(msg)
 	
 def khvtrip(msg):
@@ -164,7 +163,7 @@ def all_messages(msg):
 	if msg.text == "ℹ️ Сервисы":
 		serv(msg)
 		return
-	if msg.text == "❤️ Знакомства":
+	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
 		addlove(msg)
 		return
 	if msg.text == "📂️ Группы":
