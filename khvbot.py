@@ -28,10 +28,10 @@ def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 	khvtrip = telebot.types.KeyboardButton(text="⁉️ Вопрос")
 	servise = telebot.types.KeyboardButton(text="ℹ️ Сервисы")
-	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
+	newsadd = telebot.types.KeyboardButton(text="📰 Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
-	loveadd = telebot.types.KeyboardButton(text="❤️ Любовь")
-	keyboard.add(khvtrip, cat, loveadd, newsadd, servise)
+	loveadd = telebot.types.KeyboardButton(text="❤️ Знакомства")
+	keyboard.add(khvtrip, cat, servise, newsadd, loveadd)
 	bot.send_message(msg.chat.id, "Отправьте сообщение ⬇️", reply_markup=keyboard)
 	
 	selected_user = Users.select().where(
@@ -103,8 +103,8 @@ def serv(msg):
 	button6 = telebot.types.InlineKeyboardButton(text="Фонтаны", callback_data="Фонтаны")
 	button7 = telebot.types.InlineKeyboardButton(text="Достопримечательности", callback_data="Достопримечательности")
 	button8 = telebot.types.InlineKeyboardButton(text="Экстренные службы", callback_data="Экстренные службы") 
-	button9 = telebot.types.InlineKeyboardButton(text="Пункты вакцинации", callback_data="Пункты вакцинации")
-	markup.add(button3, button1,button5, button2, button4, button6,button7,button8,button9)
+
+	markup.add(button3, button1,button5, button2, button4, button6,button7,button8)
 	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске:️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
@@ -128,9 +128,6 @@ def longname(call):
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
 		
-	if call.data == "Пункты вакцинации":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/172239-news.html?{a}'>💉</a>", parse_mode="HTML")
-
 	if call.data == "delete":
 		bot.send_message(call.message.chat.id, f"<a href='tg://user?id=55910350'>💰</a> Удалить анкету в знакомствах 30р. Счет для <b>{call.from_user.first_name}</b>:\n<a href='https://qiwi.com/payment/form/99999?amount=30&extra[%27accountType%27]=nickname&extra[%27account%27]=JCRUSH&extra[%27comment%27]=Love_Khv{call.from_user.id}&blocked[2]=comment&blocked[1]=account'>💳 Оплатить</a> (ID {call.from_user.id})", parse_mode="HTML")
 
@@ -161,13 +158,13 @@ def send(msg):
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
 		
-	if msg.text == "Прислaть новость":
+	if msg.text == "📰 Прислaть новость":
 		addnews(msg)
 		return
 	if msg.text == "ℹ️ Сервисы":
 		serv(msg)
 		return
-	if msg.text == "❤️ Любовь":
+	if msg.text == "❤️ Знакомства":
 		addlove(msg)
 		return
 	if msg.text == "📂️ Группы":
