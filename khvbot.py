@@ -103,7 +103,8 @@ def serv(msg):
 	button6 = telebot.types.InlineKeyboardButton(text="Фонтаны", callback_data="Фонтаны")
 	button7 = telebot.types.InlineKeyboardButton(text="Достопримечательности", callback_data="Достопримечательности")
 	button8 = telebot.types.InlineKeyboardButton(text="Экстренные службы", callback_data="Экстренные службы") 
-	markup.add(button3, button1,button5, button2, button4, button6,button7,button8)
+	button9 = telebot.types.InlineKeyboardButton(text="Пункты вакцинации", callback_data="Пункты вакцинации")
+	markup.add(button3, button1,button5, button2, button4, button6,button7,button8,button9)
 	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске:️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
@@ -126,6 +127,9 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>⚠️</a>", parse_mode="HTML")
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
+		
+	if call.data == "Пункты вакцинации":
+		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/172239-news.html?{a}'>💉</a>", parse_mode="HTML")
 
 	if call.data == "delete":
 		bot.send_message(call.message.chat.id, f"<a href='tg://user?id=55910350'>💰</a> Удалить анкету в знакомствах 30р. Счет для <b>{call.from_user.first_name}</b>:\n<a href='https://qiwi.com/payment/form/99999?amount=30&extra[%27accountType%27]=nickname&extra[%27account%27]=JCRUSH&extra[%27comment%27]=Love_Khv{call.from_user.id}&blocked[2]=comment&blocked[1]=account'>💳 Оплатить</a> (ID {call.from_user.id})", parse_mode="HTML")
