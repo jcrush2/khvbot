@@ -60,6 +60,7 @@ def addlove(msg):
 	
 	sent =bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
 	
+
 	
 def khvtrip(msg):
 	chanel ="Задайте вопрос связанный с Хабаровском, а в @khvtrip постараются вам ответить."
@@ -173,13 +174,14 @@ def love_foto(msg):
 
 	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
 	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
-	all_messages(msg)
-
 	if msg.caption ==None:
 		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+	
+		
 	else:
 		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
-		
+	
+	return
 	
 
 
