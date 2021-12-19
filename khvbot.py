@@ -182,7 +182,7 @@ def all_messages(msg):
 		return
 		
 	if msg.text[0:5].lower() == "вики ":
-		bot.reply_to(msg, f"<i>{exoooy(msg.text[5:], 8)}</i>", parse_mode="HTML")
+		bot.reply_to(msg, f"{exoooy(msg.text[5:], 8)}", parse_mode="HTML")
 		return
 
 	if msg.chat.id == TO_CHAT_ID:
