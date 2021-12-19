@@ -54,13 +54,13 @@ def addlove(msg):
 \n• инфу О себе и контакты\
 \n• пишите одним предложением️"
 	markup = telebot.types.InlineKeyboardMarkup()
-	button = telebot.types.InlineKeyboardButton(text="❌ Удалить анекту", callback_data="delete") 
-	markup.add(button)
+	button0 = telebot.types.InlineKeyboardButton(text="💌 Прислать анкету", callback_data="new")
+	button = telebot.types.InlineKeyboardButton(text="❌ Удалить", callback_data="delete") 
+	markup.add(button,button0)
 	
 	sent =bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
-	bot.register_next_step_handler(sent, love_foto)
 	
-
+	
 	
 	main(msg)
 	
@@ -131,6 +131,10 @@ def longname(call):
 	if call.data == "нг":
 		sent = bot.send_message(call.message.chat.id, 'Генератор поздравлений с Новым Годом\n\nВведите Имя человека которого хотите поздравить ⬇')
 		bot.register_next_step_handler(sent, name_pozd)
+		
+	if call.data == "new":
+		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+		bot.register_next_step_handler(sent, love_foto)
 
 	if call.data == "Экстренные службы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>⚠️</a>", parse_mode="HTML")
@@ -175,7 +179,7 @@ def love_foto(msg):
 	all_messages(msg)
 
 	if msg.caption ==None:
-		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 	else:
 		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
 		
