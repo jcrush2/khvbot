@@ -171,7 +171,7 @@ def name_pozd(msg):
 	return
 	
 def love_foto(msg):
-	all_messages(msg)
+	checks(msg)
 
 	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
 	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
@@ -184,13 +184,7 @@ def love_foto(msg):
 	
 	return
 	
-
-
-    
-@bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
-def all_messages(msg):
-	TO_CHAT_ID= -542531596
-		
+def checks(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
@@ -206,7 +200,13 @@ def all_messages(msg):
 	if msg.text == "⁉️ Вопрос":
 		khvtrip(msg)
 		return
+    
+@bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
+def all_messages(msg):
+	TO_CHAT_ID= -542531596
 		
+
+	checks(msg)
 		
 
 	if msg.chat.id == TO_CHAT_ID:
@@ -223,7 +223,7 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
-	return
+
 		
 	
 def exoooy(text,intro):
