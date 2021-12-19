@@ -187,10 +187,7 @@ def all_messages(msg):
 		khvtrip(msg)
 		return
 		
-		
-	if msg.text[0:5].lower() == "вики ":
-		bot.reply_to(msg, f"<b>{msg.text[5:]}</b> {exoooy(msg.text[5:], 8)}", parse_mode="HTML")
-		return
+
 
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.text.lower() == "/вопрос":
