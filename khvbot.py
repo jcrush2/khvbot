@@ -156,7 +156,15 @@ def send(msg):
 		except:
 			continue
 
-	
+@bot.message_handler(commands=['нг'])
+def start2(msg):
+	sent = bot.send_message(msg.chat.id, 'Введите Имя')
+	bot.register_next_step_handler(sent, hello)
+
+def hello(msg):
+	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
+
+    
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
