@@ -103,7 +103,7 @@ def serv(msg):
 	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости")
 	button4 = telebot.types.InlineKeyboardButton(text="Клубы", callback_data="Клубы") 
 	button6 = telebot.types.InlineKeyboardButton(text="Фонтаны", callback_data="Фонтаны")
-	button7 = telebot.types.InlineKeyboardButton(text="Достопримечательности", callback_data="Достопримечательности")
+	button7 = telebot.types.InlineKeyboardButton(text="Поздравление", callback_data="нг")
 	button8 = telebot.types.InlineKeyboardButton(text="Экстренные службы", callback_data="Экстренные службы") 
 
 	markup.add(button3, button1,button5, button2, button4, button6,button7,button8)
@@ -123,8 +123,10 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Фонтаны":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>⛲️</a>", parse_mode="HTML")
-	if call.data == "Достопримечательности":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/152564-khv.html?{a}'>🎡</a>", parse_mode="HTML")
+	if call.data == "нг":
+		sent = bot.send_message(msg.chat.id, 'Введите Имя человека кого хотите поздравить с Новым Годом')
+		bot.register_next_step_handler(sent, name_pozd)
+
 	if call.data == "Экстренные службы":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>⚠️</a>", parse_mode="HTML")
 	if call.data == "Реклама":
@@ -156,13 +158,10 @@ def send(msg):
 		except:
 			continue
 
-@bot.message_handler(commands=['нг'])
-def start2(msg):
-	sent = bot.send_message(msg.chat.id, 'Введите Имя')
-	bot.register_next_step_handler(sent, hello)
 
-def hello(msg):
+def name_pozd(msg):
 	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
+	return
 
     
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
@@ -185,9 +184,6 @@ def all_messages(msg):
 		khvtrip(msg)
 		return
 		
-	if msg.text[0:11].lower() == "поздравить ":
-		bot.reply_to(msg, f"<i>{exoooy(msg.text[11:], 20)}</i>", parse_mode="HTML")
-		return
 		
 	if msg.text[0:5].lower() == "вики ":
 		bot.reply_to(msg, f"<b>{msg.text[5:]}</b> {exoooy(msg.text[5:], 8)}", parse_mode="HTML")
