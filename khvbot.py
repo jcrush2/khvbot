@@ -169,13 +169,15 @@ def name_pozd(msg):
 	return
 	
 def love_foto(msg):
+	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
+	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
+	
 	if msg.caption ==None:
 		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 	else:
 		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
 	
-	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
-	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
+
 
     
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
