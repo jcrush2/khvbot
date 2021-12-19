@@ -124,7 +124,7 @@ def longname(call):
 	if call.data == "Фонтаны":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>⛲️</a>", parse_mode="HTML")
 	if call.data == "нг":
-		sent = bot.send_message(msg.chat.id, 'Введите Имя человека кого хотите поздравить с Новым Годом')
+		sent = bot.send_message(call.message.chat.id, 'Введите Имя человека кого хотите поздравить с Новым Годом')
 		bot.register_next_step_handler(sent, name_pozd)
 
 	if call.data == "Экстренные службы":
