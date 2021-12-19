@@ -56,7 +56,12 @@ def addlove(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button = telebot.types.InlineKeyboardButton(text="❌ Удалить анекту", callback_data="delete") 
 	markup.add(button)
-	bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
+	
+	sent =bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
+	bot.register_next_step_handler(sent, love_foto)
+	
+
+	
 	main(msg)
 	
 def khvtrip(msg):
@@ -162,6 +167,13 @@ def send(msg):
 def name_pozd(msg):
 	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
 	return
+	
+def love_foto(msg):
+	if msg.caption ==None:
+		bot.reply_to(msg, f"Пришлите свое фото ⬇", parse_mode="HTML")
+		return
+	else:
+		bot.reply_to(msg, f"Пришлите инфу о себе и контакты ⬇", parse_mode="HTML")
 
     
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
