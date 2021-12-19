@@ -223,6 +223,8 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
+	return
+		
 	
 def exoooy(text,intro):
 	headers = {
