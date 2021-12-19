@@ -56,7 +56,7 @@ def addlove(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button0 = telebot.types.InlineKeyboardButton(text="💌 Прислать анкету", callback_data="new")
 	button = telebot.types.InlineKeyboardButton(text="❌ Удалить", callback_data="delete") 
-	markup.add(button,button0)
+	markup.add(button0,button)
 	
 	sent =bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
 	
@@ -133,7 +133,7 @@ def longname(call):
 		bot.register_next_step_handler(sent, name_pozd)
 		
 	if call.data == "new":
-		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+		sent =bot.send_message(call.message.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 		bot.register_next_step_handler(sent, love_foto)
 
 	if call.data == "Экстренные службы":
