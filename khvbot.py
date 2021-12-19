@@ -170,8 +170,10 @@ def name_pozd(msg):
 	
 def love_foto(msg):
 	if msg.caption ==None:
-		bot.reply_to(msg, f"Пришлите свое фото ⬇", parse_mode="HTML")
-		return
+
+		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото ⬇")
+		bot.register_next_step_handler(sent, love_foto)
+	
 	else:
 		bot.reply_to(msg, f"Пришлите инфу о себе и контакты ⬇", parse_mode="HTML")
 
