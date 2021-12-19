@@ -154,7 +154,21 @@ def send(msg):
 			bot.send_message(user.userid, msg.text[2:], parse_mode="HTML" )
 		except:
 			continue
+@bot.message_handler(commands=["нг"])
+def ng(msg):
+	delta = datetime.datetime(datetime.datetime.now().year+1, 1, 1) - datetime.datetime.now()+datetime.timedelta(hours=-10)
+	
+	if msg.reply_to_message:
+		myname=msg.reply_to_message.from_user.first_name
+		otv=msg.reply_to_message
+	else:
+		myname=msg.from_user.first_name
+		otv=msg
+		
 
+	bot.reply_to(otv, f"<i>{exoooy(myname, 20)}</i>\n\nДо нового года осталось: {delta.days} дней {delta.seconds // 3600} часа {(delta.seconds // 60) % 60} мин {delta.seconds % 60} сек.", parse_mode="HTML")
+	return
+	
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
@@ -189,19 +203,6 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
-@bot.message_handler(commands=["нг"])
-def ng(msg):
-	delta = datetime.datetime(datetime.datetime.now().year+1, 1, 1) - datetime.datetime.now()+datetime.timedelta(hours=-10)
-	
-	if msg.reply_to_message:
-		myname=msg.reply_to_message.from_user.first_name
-		otv=msg.reply_to_message
-	else:
-		myname=msg.from_user.first_name
-		otv=msg
-		
-
-	bot.reply_to(otv, f"<i>{exoooy(myname, 20)}</i>\n\nДо нового года осталось: {delta.days} дней {delta.seconds // 3600} часа {(delta.seconds // 60) % 60} мин {delta.seconds % 60} сек.", parse_mode="HTML")
 	
 def exoooy(text,intro):
 	headers = {
