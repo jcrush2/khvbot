@@ -180,6 +180,10 @@ def all_messages(msg):
 	if msg.text[0:11].lower() == "поздравить ":
 		bot.reply_to(msg, f"<i>{exoooy(msg.text[11:], 20)}</i>", parse_mode="HTML")
 		return
+		
+	if msg.text[0:5].lower() == "вики ":
+		bot.reply_to(msg, f"<i>{exoooy(msg.text[5:], 8)}</i>", parse_mode="HTML")
+		return
 
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.text.lower() == "/вопрос":
