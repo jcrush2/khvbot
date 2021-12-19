@@ -103,7 +103,7 @@ def serv(msg):
 	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости")
 	button4 = telebot.types.InlineKeyboardButton(text="Клубы", callback_data="Клубы") 
 	button6 = telebot.types.InlineKeyboardButton(text="Фонтаны", callback_data="Фонтаны")
-	button7 = telebot.types.InlineKeyboardButton(text="Поздравление", callback_data="нг")
+	button7 = telebot.types.InlineKeyboardButton(text="Поздравления", callback_data="нг")
 	button8 = telebot.types.InlineKeyboardButton(text="Экстренные службы", callback_data="Экстренные службы") 
 
 	markup.add(button3, button1,button5, button2, button4, button6,button7,button8)
@@ -124,7 +124,7 @@ def longname(call):
 	if call.data == "Фонтаны":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>⛲️</a>", parse_mode="HTML")
 	if call.data == "нг":
-		sent = bot.send_message(call.message.chat.id, 'Введите Имя человека кого хотите поздравить с Новым Годом')
+		sent = bot.send_message(call.message.chat.id, 'Генератор поздравлений с Новым Годом\n\nВведите Имя человека которого хотите поздравить ⬇')
 		bot.register_next_step_handler(sent, name_pozd)
 
 	if call.data == "Экстренные службы":
