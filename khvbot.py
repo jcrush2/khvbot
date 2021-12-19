@@ -4,6 +4,8 @@ import hashlib
 import string
 import os
 
+import urllib.request
+
 
 from flask import Flask, request
 import peewee as pw
@@ -186,6 +188,36 @@ def all_messages(msg):
 		
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
+		
+@bot.message_handler(commands=["нг"], func=is_my_message)
+def ng(msg):
+	delta = datetime.datetime(datetime.datetime.now().year+1, 1, 1) - datetime.datetime.now()+datetime.timedelta(hours=-10)
+	
+	if msg.reply_to_message:
+		myname=msg.reply_to_message.from_user.first_name
+		otv=msg.reply_to_message
+	else:
+		myname=msg.from_user.first_name
+		otv=msg
+		
+
+	bot.reply_to(otv, f"<i>{exoooy(myname, 20)}</i>\n\nДо нового года осталось: {delta.days} дней {delta.seconds // 3600} часа {(delta.seconds // 60) % 60} мин {delta.seconds % 60} сек.", parse_mode="HTML")
+	
+def exoooy(text,intro):
+	headers = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/605.1.15 '
+                  '(KHTML, like Gecko) Version/14.1.1 Safari/605.1.15',
+    'Origin': 'https://yandex.ru',
+    'Referer': 'https://yandex.ru/',}
+
+	API_URL = 'https://yandex.ru/lab/api/yalm/text3'
+	payload = {"query":text, "intro":intro, "filter":1}
+	params = json.dumps(payload).encode('utf-8')
+	req = urllib.request.Request(API_URL, data=params, headers=headers)
+	response = urllib.request.urlopen(req)
+	ya=json.loads(response.read().decode('utf-8'))
+	return ya["text"]
 
 # bot.polling(none_stop=True)
 
