@@ -61,9 +61,6 @@ def addlove(msg):
 	sent =bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
 	
 	
-	
-	main(msg)
-	
 def khvtrip(msg):
 	chanel ="Задайте вопрос связанный с Хабаровском, а в @khvtrip постараются вам ответить."
 	bot.send_message(msg.chat.id, f"{chanel}", parse_mode="HTML")
