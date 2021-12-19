@@ -170,12 +170,10 @@ def name_pozd(msg):
 	
 def love_foto(msg):
 	if msg.caption ==None:
-
-		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото ⬇")
-		bot.register_next_step_handler(sent, love_foto)
+		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 	
 	else:
-		bot.reply_to(msg, f"Пришлите инфу о себе и контакты ⬇", parse_mode="HTML")
+		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
 
     
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
