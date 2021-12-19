@@ -189,7 +189,7 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
-@bot.message_handler(commands=["нг"], func=is_my_message)
+@bot.message_handler(commands=["нг"])
 def ng(msg):
 	delta = datetime.datetime(datetime.datetime.now().year+1, 1, 1) - datetime.datetime.now()+datetime.timedelta(hours=-10)
 	
