@@ -171,6 +171,7 @@ def name_pozd(msg):
 	return
 	
 def love_foto(msg):
+	all_messages(msg)
 
 	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
 	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
