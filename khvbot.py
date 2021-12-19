@@ -167,25 +167,6 @@ def send(msg):
 
 
 def name_pozd(msg):
-	check_meun(msg)
-	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
-	return
-	
-def love_foto(msg):
-	check_meun(msg)
-
-	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
-	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
-	if msg.caption ==None:
-		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
-	
-		
-	else:
-		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
-	
-	return
-	
-def check_meun(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
@@ -201,13 +182,58 @@ def check_meun(msg):
 	if msg.text == "⁉️ Вопрос":
 		khvtrip(msg)
 		return
+	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
+	return
+	
+def love_foto(msg):
+	if msg.text == "Прислaть новость":
+		addnews(msg)
+		return
+	if msg.text == "ℹ️ Сервисы":
+		serv(msg)
+		return
+	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
+		addlove(msg)
+		return
+	if msg.text == "📂️ Группы":
+		chats(msg)
+		return
+	if msg.text == "⁉️ Вопрос":
+		khvtrip(msg)
+		return
+
+	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
+	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
+	if msg.caption ==None:
+		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+	
+		
+	else:
+		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
+	
+	return
+	
+
     
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
 def all_messages(msg):
 	TO_CHAT_ID= -542531596
 		
-	check_meun(msg)
-		
+	if msg.text == "Прислaть новость":
+		addnews(msg)
+		return
+	if msg.text == "ℹ️ Сервисы":
+		serv(msg)
+		return
+	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
+		addlove(msg)
+		return
+	if msg.text == "📂️ Группы":
+		chats(msg)
+		return
+	if msg.text == "⁉️ Вопрос":
+		khvtrip(msg)
+		return
 		
 
 	if msg.chat.id == TO_CHAT_ID:
