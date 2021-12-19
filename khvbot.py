@@ -56,7 +56,9 @@ def addlove(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button = telebot.types.InlineKeyboardButton(text="❌ Удалить анекту", callback_data="delete") 
 	markup.add(button)
-	bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
+	
+	sent =bot.send_message(chat_id=msg.chat.id, text=f"{chanel}️", reply_markup=markup)
+	bot.register_next_step_handler(sent, love_foto)
 	
 
 	
@@ -165,6 +167,18 @@ def send(msg):
 def name_pozd(msg):
 	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
 	return
+	
+def love_foto(msg):
+
+	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
+	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
+
+	if msg.caption ==None:
+		sent =bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+	else:
+		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
+	
+
 
     
 @bot.message_handler(content_types=['text', 'document', 'photo', 'audio', 'video','voice'])
@@ -187,7 +201,7 @@ def all_messages(msg):
 		khvtrip(msg)
 		return
 		
-
+		
 
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.text.lower() == "/вопрос":
@@ -204,7 +218,21 @@ def all_messages(msg):
 		main(msg)
 		
 	
+def exoooy(text,intro):
+	headers = {
+    'Content-Type': 'application/json',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/605.1.15 '
+                  '(KHTML, like Gecko) Version/14.1.1 Safari/605.1.15',
+    'Origin': 'https://yandex.ru',
+    'Referer': 'https://yandex.ru/',}
 
+	API_URL = 'https://yandex.ru/lab/api/yalm/text3'
+	payload = {"query":text, "intro":intro, "filter":1}
+	params = json.dumps(payload).encode('utf-8')
+	req = urllib.request.Request(API_URL, data=params, headers=headers)
+	response = urllib.request.urlopen(req)
+	ya=json.loads(response.read().decode('utf-8'))
+	return ya["text"]
 
 # bot.polling(none_stop=True)
 
