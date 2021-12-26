@@ -211,7 +211,7 @@ def love_foto(msg):
 		bot.register_next_step_handler(sent, love_foto)
 		return
 	if msg.caption ==None:
-		bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 		bot.register_next_step_handler(sent, love_foto)
 		return
 		
