@@ -261,7 +261,7 @@ def channel_post(msg):
 	chat_id=msg.chat.id,
 	message_id=msg.message_id,
 	text=msg.text,
-	reply_markup=ZaBan_bottom(msg.forward_from.user.id, msg.forward_from.user.id),
+	reply_markup=ZaBan_bottom(msg.forward_from.id, msg.forward_from.id),
 	parse_mode='HTML')
 	
 def ZaBan_bottom(nameid, idname):
