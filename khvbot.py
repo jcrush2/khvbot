@@ -252,7 +252,6 @@ def all_messages(msg):
 		if msg.text.lower() == "/l":
 			bot.send_photo(msg.chat.id, photos, caption = f"👤 от <b>{msg.from_user.first_name}</b>:\n{msga}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
 			
-\
 
 			
 		else:
