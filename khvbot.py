@@ -246,14 +246,32 @@ def all_messages(msg):
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
 	else:
+		
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
 		bot.send_message(TO_CHAT_ID, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
 		
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
+@bot.channel_post_handler(content_types=["text",'photo'])
+def channel_post(msg):
+	
+			
+	bot.edit_message_text(
+	chat_id=msg.chat.id,
+	message_id=msg.message_id,
+	text=f'{msg.text}',
+	reply_markup=ZaBan_bottom(msg.from_user.first_name, msg.from_user.id),
+	parse_mode='HTML')
+	
+def ZaBan_bottom(nameid, idname):
+     
+	markup = telebot.types.InlineKeyboardMarkup()
+	button = telebot.types.InlineKeyboardButton(text=f'🔫 {nameid}️', url='https://habrahabr.ru')
 
-		
+	markup.add(button)
+
+	return markup
 	
 def exoooy(text,intro):
 	headers = {
