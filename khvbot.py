@@ -209,7 +209,7 @@ def love_foto(msg):
 	if msg.document:
 		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Фото должно быть отправленно через галерею, повторите ⬇")
 		bot.register_next_step_handler(sent, love_foto)
-		
+		return
 	if msg.caption ==None:
 		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 	
