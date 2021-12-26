@@ -260,7 +260,7 @@ def channel_post(msg):
 	url_button = types.InlineKeyboardButton(text=f"💬 {msg.from_user.first_name}", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.from_user.first_name}")
 	
 	keyboard.add(url_button)
-	bot.reply_to(msg, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
 			
 	
 	
