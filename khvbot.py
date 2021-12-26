@@ -7,11 +7,9 @@ import os
 import urllib.request
 import json
 
-
 from flask import Flask, request
 import peewee as pw
 import telebot
-from telebot import types
 
 from database import Users
 import config
@@ -254,24 +252,6 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
-@bot.channel_post_handler(content_types=["text",'photo'])
-def channel_post(msg):
-	
-	bot.edit_message_text(
-	chat_id=msg.chat.id,
-	message_id=msg.message_id,
-	text=msg.text,
-	reply_markup=ZaBan_bottom(msg.forward_from.id, msg.forward_from.id),
-	parse_mode='HTML')
-	
-def ZaBan_bottom(nameid, idname):
-     
-	markup = telebot.types.InlineKeyboardMarkup()
-	button = telebot.types.InlineKeyboardButton(text=f'🔫 {nameid}️', url=f'tg://user?id={idname}')
-
-	markup.add(button)
-
-	return markup
 	
 def exoooy(text,intro):
 	headers = {
