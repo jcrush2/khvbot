@@ -253,7 +253,7 @@ def all_messages(msg):
 		keyboard = types.InlineKeyboardMarkup()
 		url_button = types.InlineKeyboardButton(text=f"💬 {msg.from_user.first_name}", url=f"tg://user?id={msg.from_user.id}")
 		keyboard.add(url_button)
-		bot.send_message(TO_CHAT_ID, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+		bot.send_message(-1001446448774, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
 	
 	
 		bot.send_message(TO_CHAT_ID, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
