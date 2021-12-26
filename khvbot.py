@@ -11,6 +11,7 @@ import json
 from flask import Flask, request
 import peewee as pw
 import telebot
+from telebot import types
 
 from database import Users
 import config
