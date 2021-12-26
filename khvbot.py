@@ -258,10 +258,10 @@ def all_messages(msg):
 def channel_post(msg):
 	
 	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text=f"💬 {msg.forward_from}", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.forward_frome}")
+	url_button = types.InlineKeyboardButton(text=f"💬 {msg.forward_sender_name}", url=f"https://khabara.ru/tg/{msg.forward_sender_name}-id.html#{msg.forward_sender_name}")
 	
 	keyboard.add(url_button)
-	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.forward_from}">{msg.forward_from}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.forward_sender_name}">{msg.forward_sender_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
 	
 	
 
