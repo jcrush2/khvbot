@@ -11,7 +11,6 @@ import json
 from flask import Flask, request
 import peewee as pw
 import telebot
-from telebot import types
 
 from database import Users
 import config
@@ -243,22 +242,18 @@ def all_messages(msg):
 		if msg.text.lower() == "/вопрос":
 			bot.send_message(-1001310162579,f'⁉️ {msg.reply_to_message.text}', parse_mode="HTML")
 			bot.reply_to(msg.reply_to_message,f"⁉️ Вопрос отправлен <a href='https://t.me/khvtrip'>Знатокам Хабаровска</a>", parse_mode="HTML")
-		if msg.text.lower() == "/l":
-			bot.send_message(-1001446448774,f"⁉️ {msg.reply_to_message.text}\n\nНаписать <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a>", parse_mode="HTML")
-			bot.reply_to(msg.reply_to_message,f"⁉️ знакомства отправлен <a href='https://t.me/khvtrip'>Знатокам Хабаровска</a>", parse_mode="HTML")
-			
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
 	else:
 		
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
-		
 		bot.send_message(TO_CHAT_ID, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
 		
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
+
 	
 def exoooy(text,intro):
 	headers = {
