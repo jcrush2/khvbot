@@ -244,7 +244,7 @@ def all_messages(msg):
 			bot.send_message(-1001310162579,f'⁉️ {msg.reply_to_message.text}', parse_mode="HTML")
 
 		if msg.text.lower() == "/l":
-			bot.send_message(-1001446448774,f"👤 от <b>{msg.from_user.first_name}</b>\n{msg.reply_to_message.text}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
+			bot.send_message(-1001446448774,f"👤 от <b>{msg.from_user.first_name}</b>\n{msg.reply_to_message.text}{msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
 
 			
 		else:
