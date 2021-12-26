@@ -205,7 +205,7 @@ def love_foto(msg):
 		return
 
 	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
-	bot.send_message(-542531596, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
+	bot.send_message(-542531596, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}")
 	if msg.caption ==None:
 		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 	
@@ -247,7 +247,7 @@ def all_messages(msg):
 			bot.send_message(TO_CHAT_ID, "отправлено")
 	else:
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
-		bot.send_message(TO_CHAT_ID, f"От: {msg.from_user.first_name} id: {msg.from_user.id}")
+		bot.send_message(TO_CHAT_ID, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}")
 		
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
