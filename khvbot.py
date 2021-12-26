@@ -259,7 +259,7 @@ def channel_post(msg):
 	
 	bot.edit_message_text(
 	chat_id=msg.chat.id,
-	message_id=msg.message_id,
+	message_id=msg.forward_from_message_id,
 	text=msg.text,
 	reply_markup=ZaBan_bottom(msg.forward_from, msg.forward_from),
 	parse_mode='HTML')
