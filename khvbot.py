@@ -206,6 +206,10 @@ def love_foto(msg):
 
 	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
 	bot.send_message(-542531596, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
+	if msg.document:
+		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Фото должно быть отправленно через галерею, повторите ⬇")
+		bot.register_next_step_handler(sent, love_foto)
+		
 	if msg.caption ==None:
 		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 	
