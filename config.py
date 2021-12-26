@@ -4,7 +4,7 @@ gods = [55910350]
 
 # Бот в текущей сборке расчитан на работу с heroku.com
 # Это ссылка на приложение, для установления вебхука
-url = "https://khvbot2.herokuapp.com/bot"
+url = "https://khvbot.herokuapp.com/bot"
 
 # Имя бота (то, которое @Karmator_bot)
 bot_name = "khvbot"
