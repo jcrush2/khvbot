@@ -243,7 +243,7 @@ def all_messages(msg):
 			bot.send_message(-1001310162579,f'⁉️ {msg.reply_to_message.text}', parse_mode="HTML")
 		if msg.text.lower() == "/l":
 	
-			bot.send_photo(-1001446448774, msg.reply_to_message.photo[0].file_id, caption = f"👤 от <b>{msg.reply_to_message.from_user.first_name}</b>: <i>{msg.reply_to_message.caption}</i>\n\n<a href='tg://user?id={msg.reply_to_message.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
+			bot.send_photo(-1001446448774, msg.reply_to_message.photo[0].file_id, caption = f"👤 от <b>{msg.reply_to_message.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.id}'>📝 Написать</a>", parse_mode="HTML")
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
