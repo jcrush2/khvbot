@@ -211,8 +211,9 @@ def love_foto(msg):
 		bot.register_next_step_handler(sent, love_foto)
 		return
 	if msg.caption ==None:
-		bot.send_message(msg.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
-	
+		bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
+		bot.register_next_step_handler(sent, love_foto)
+		return
 		
 	else:
 		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
