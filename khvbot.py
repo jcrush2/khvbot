@@ -242,7 +242,7 @@ def all_messages(msg):
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.reply_to_message.caption !=None: 
 			msga=msg.reply_to_message.caption
-			photos=msg.reply_to_message.photo[0]
+			photos=msg.reply_to_message.photo
 		else:
 			msga=msg.reply_to_message.text
 			
