@@ -266,7 +266,7 @@ def channel_post(msg):
 def ZaBan_bottom(nameid, idname):
      
 	markup = telebot.types.InlineKeyboardMarkup()
-	button = telebot.types.InlineKeyboardButton(text=f'🔫 {nameid}️', url=f'tg://user?id={msg.from_user.id}')
+	button = telebot.types.InlineKeyboardButton(text=f'🔫 {nameid}️', url=f'tg://user?id={idname}')
 
 	markup.add(button)
 
