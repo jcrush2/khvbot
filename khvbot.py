@@ -242,7 +242,7 @@ def all_messages(msg):
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.reply_to_message.caption !=None: 
 			msga=msg.reply_to_message.caption
-			photos=msg.reply_to_message.photo[0].file_id
+			photos=msg.reply_to_message.photo[0]
 		else:
 			msga=msg.reply_to_message.text
 			
@@ -250,9 +250,8 @@ def all_messages(msg):
 			bot.send_message(-1001310162579,f'⁉️ {msga}', parse_mode="HTML")
 
 		if msg.text.lower() == "/l":
-	
-			bot.send_photo(-1001446448774, photos, caption = f"👤 от <b>{msg.from_user.first_name}</b>:\n{msga}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
 			
+			bot.send_message(-1001446448774,f"👤 от <b>{msg.from_user.first_name}</b>:\n{msga}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
 
 			
 		else:
