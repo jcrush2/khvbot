@@ -245,7 +245,7 @@ def all_messages(msg):
 			bot.reply_to(msg.reply_to_message,f"⁉️ Вопрос отправлен <a href='https://t.me/khvtrip'>Знатокам Хабаровска</a>", parse_mode="HTML")
 		if msg.text.lower() == "/l":
 			bot.send_message(-1001446448774,f"От <b>{msg.from_user.first_name}</b>\n{msg.reply_to_message.text}\n\n<a href='tg://user?id={msg.from_user.id}'>Написать</a>", parse_mode="HTML")
-			bot.reply_to(msg.reply_to_message,f"⁉️ знакомства отправлен <a href='https://t.me/khvtrip'>Знатокам Хабаровска</a>", parse_mode="HTML")
+			bot.send_message(461300905,f"⁉️ знакомства отправлен <a href='https://t.me/khvtrip'>Знатокам Хабаровска</a>", parse_mode="HTML")
 			
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
