@@ -242,8 +242,11 @@ def all_messages(msg):
 		if msg.text.lower() == "/вопрос":
 			bot.send_message(-1001310162579,f'⁉️ {msg.reply_to_message.text}', parse_mode="HTML")
 		if msg.text.lower() == "/l":
-	
-			bot.send_photo(-1001446448774, msg.reply_to_message.photo[0].file_id, caption = f"👤 от <b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
+			if msg.reply_to_message.caption !=None: 
+				bot.send_photo(-1001446448774, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
+			else:
+				
+				bot.send_message(-1001446448774, f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.text}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
