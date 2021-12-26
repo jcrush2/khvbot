@@ -26,7 +26,7 @@ def start(msg):
 	main(msg)
 	
 		
-@bot.message_handler(commands=["main"])
+@bot.message_handler(commands=["main","OTMEHA"])
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 	khvtrip = telebot.types.KeyboardButton(text="⁉️ Вопрос")
@@ -207,11 +207,11 @@ def love_foto(msg):
 	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
 	bot.send_message(-542531596, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
 	if msg.document:
-		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Фото должно быть отправленно через галерею, повторите ⬇ <a href='/отмена'>/отмена</a>" , parse_mode="HTML")
+		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Фото должно быть отправленно через галерею, повторите ⬇ /OTMEHA" , parse_mode="HTML")
 		bot.register_next_step_handler(sent, love_foto)
 		return
 	if msg.caption ==None:
-		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇ <a href='/отмена'>/отмена</a>" , parse_mode="HTML")
+		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇ /OTMEHA" , parse_mode="HTML")
 		bot.register_next_step_handler(sent, love_foto)
 		return
 		
