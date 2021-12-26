@@ -257,10 +257,10 @@ def all_messages(msg):
 def channel_post(msg):
 	
 	keyboard = types.InlineKeyboardMarkup()
-	url_button = types.InlineKeyboardButton(text=f"💬 {msg.from_user.first_name}", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.from_user.first_name}")
+	url_button = types.InlineKeyboardButton(text=f"💬 ", url=f"https://khabara.ru/tg/")
 	
 	keyboard.add(url_button)
-	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+	bot.send_message(msg.chat.id, f'ℹ️ Объявление ', parse_mode="HTML", reply_markup=keyboard)
 			
 	
 	
