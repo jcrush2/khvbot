@@ -249,7 +249,7 @@ def all_messages(msg):
 			else:
 				msga=msg.reply_to_message.text
 				
-			bot.send_message(-1001446448774,f"👤 от <b>{msg.from_user.first_name}</b>\n{msga}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
+		bot.send_message(-1001446448774,f"👤 от <b>{msg.from_user.first_name}</b>\n{msga}\n\n<a href='tg://user?id={msg.from_user.id}'>📝 Написать</a>", parse_mode="HTML")
 
 			
 		else:
