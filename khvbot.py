@@ -257,21 +257,14 @@ def all_messages(msg):
 @bot.channel_post_handler(content_types=["text",'photo'])
 def channel_post(msg):
 	
-	bot.edit_message_text(
-	chat_id=msg.chat.id,
-	message_id=msg.message_id,
-	text=msg.text,
-	reply_markup=ZaBan_bottom(msg.from_user.first_name, msg.from_user.id),
-	parse_mode='HTML')
+	keyboard = types.InlineKeyboardMarkup()
+	url_button = types.InlineKeyboardButton(text=f"💬 {msg.from_user.first_name}", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.from_user.first_name}")
 	
-def ZaBan_bottom(nameid, idname):
-     
-	markup = telebot.types.InlineKeyboardMarkup()
-	button = telebot.types.InlineKeyboardButton(text=f'🔫 {nameid}️', url=f'tg://user?id={idname}')
+	keyboard.add(url_button)
+	bot.send_message(msg.chat.id, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+	
+	
 
-	markup.add(button)
-
-	return markup
 	
 def exoooy(text,intro):
 	headers = {
