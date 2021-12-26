@@ -7,9 +7,11 @@ import os
 import urllib.request
 import json
 
+
 from flask import Flask, request
 import peewee as pw
 import telebot
+from telebot import types
 
 from database import Users
 import config
@@ -247,6 +249,12 @@ def all_messages(msg):
 	else:
 		
 		bot.forward_message(TO_CHAT_ID, msg.chat.id, msg.message_id)
+		keyboard = types.InlineKeyboardMarkup()
+		url_button = types.InlineKeyboardButton(text=f"💬 {msg.from_user.first_name}", url=f"https://khabara.ru/tg/{msg.from_user.id}-id.html#{msg.from_user.first_name}")
+		keyboard.add(url_button)
+		bot.send_message(TO_CHAT_ID, f'ℹ️ Объявление от <a href="tg://user?id={msg.from_user.id}">{msg.from_user.first_name}</a>\n<i>Оставить отзыв ⬇️️️</i>', parse_mode="HTML", reply_markup=keyboard)
+	
+	
 		bot.send_message(TO_CHAT_ID, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
 		
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
