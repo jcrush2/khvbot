@@ -220,7 +220,7 @@ def love_foto(msg):
 		return
 		
 	else:
-		bot.send_photo(msg.chat.id, msg.msg.from_user.photo[0].file_id, caption = f"<b>{msg.from_user.first_name}</b>: {msg.from_user.caption}\n\nВаша анкета отправлена на модерацию...", parse_mode="HTML")
+		bot.send_photo(msg.chat.id, msg.from_user.photo[0].file_id, caption = f"<b>{msg.from_user.first_name}</b>: {msg.from_user.caption}\n\nВаша анкета отправлена на модерацию...", parse_mode="HTML")
 		
 
 	return
