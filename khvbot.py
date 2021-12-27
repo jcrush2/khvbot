@@ -220,8 +220,9 @@ def love_foto(msg):
 		return
 		
 	else:
-		bot.reply_to(msg, f"Ваша анкета отправлена на модерацию...", parse_mode="HTML")
-	
+		bot.send_photo(msg.chat.id, msg.msg.from_user.photo[0].file_id, caption = f"<b>{msg.from_user.first_name}</b>: {msg.from_user.caption}\n\nВаша анкета отправлена на модерацию...", parse_mode="HTML")
+		
+
 	return
 	
 
@@ -258,9 +259,9 @@ def all_messages(msg):
 					bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
 			else:
 				if msg.reply_to_message.forward_sender_name!=None:
-					bot.send_message(-1001446448774, f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.text}", parse_mode="HTML")
+					bot.send_message(-1001099972307, f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.text}", parse_mode="HTML")
 				else:
-					bot.send_message(-1001446448774, f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.text}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
+					bot.send_message(-1001099972307, f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.text}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
