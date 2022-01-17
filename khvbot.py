@@ -258,6 +258,9 @@ def all_messages(msg):
 				else:
 					bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
 			else:
+				if msg.reply_to_message.caption ==None:
+					bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.caption}", parse_mode="HTML")
+					
 				if msg.reply_to_message.forward_sender_name!=None:
 					bot.send_message(-1001099972307, f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.text}", parse_mode="HTML")
 				else:
