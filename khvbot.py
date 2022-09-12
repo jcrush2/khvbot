@@ -1,10 +1,9 @@
 #!usr/bin/python3
 import datetime
-import time
 import hashlib
 import string
 import os
-import random
+
 import urllib.request
 import json
 
@@ -18,8 +17,6 @@ import config
 
 TELEGRAM_API = os.environ["telegram_token"]
 bot = telebot.TeleBot(TELEGRAM_API)
-
-vin_database = {}
 
 reklama_post = "Реклама на канале @khv_news, а также в Хабаровских группах обсуждается индивидуально, обязательным условием является пометка поста тегом #реклама. \n\n Сообщением пришлите картинку, пост и желаемое время публикации. \n\n Для связи по рекламе: @jcrush"
     
@@ -117,23 +114,6 @@ def serv(msg):
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
 	a = datetime.datetime.today()
-	
-	if  call.data == "vin":
-		userstatus = bot.get_chat_member(-1001446448774, call.from_user.id)
-		if userstatus.status == 'creator':
-			vin_id, vin_name=random.choice(list(vin_database.items()))
-			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!", parse_mode="HTML")
-			return
-			
-		if userstatus.status != 'member':
-			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Вы не выполнили условия конкурса: не подписались на канал.")
-			return
-			
-		else:
-			vin_database[call.from_user.id] =call.from_user.first_name
-			bot.send_message(call.message.chat.id, f"{len(vin_database)}. <b>{call.from_user.first_name}</b> подтвердил(а) участие в розыгрыше.", parse_mode="HTML")
-			return
-			
 	if call.data == "Погода":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/weather.html?{a}'>🌡</a>", parse_mode="HTML")
 		
@@ -163,8 +143,6 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='tg://user?id=55910350'>💰</a> Удалить анкету в знакомствах 30р. Счет для <b>{call.from_user.first_name}</b>:\n<a href='https://qiwi.com/payment/form/99999?amount=30&extra[%27accountType%27]=nickname&extra[%27account%27]=JCRUSH&extra[%27comment%27]=Love_Khv{call.from_user.id}&blocked[2]=comment&blocked[1]=account'>💳 Оплатить</a> (ID {call.from_user.id})", parse_mode="HTML")
 		
 		bot.send_message(-542531596, f"Удалить в знакомствах: {call.from_user.first_name} id: {call.from_user.id}")
-		
-		
 
 @bot.message_handler(commands=["stat"])
 def stat(msg):
@@ -201,8 +179,7 @@ def vin(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button = telebot.types.InlineKeyboardButton(text=f'Участвовать!', callback_data="vin")
 	markup.add(button)
-	msg_id = bot.send_message(chat_id=-1001446448774, text=f'🎉🎉🎉 ️{msg.text[4:]}', reply_markup=markup).message_id
-	
+	msg_id = bot.send_message(chat_id=msg.chat.id, text=f'🎉🎉🎉 ️{msg.text[4:]}', reply_markup=markup).message_id
 def name_pozd(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
