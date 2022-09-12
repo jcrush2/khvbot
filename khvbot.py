@@ -127,7 +127,9 @@ def longname(call):
 			
 		else:
 			vin_database[call.from_user.id] =call.from_user.first_name
-			bot.send_message(461300905, f"<b>{call.from_user.first_name}</b> подтвердил(а) участие в розыгрыше на канале @khv_news.", parse_mode="HTML")
+			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"<b>{call.from_user.first_name}</b> подтвердил(а) участие в розыгрыше на канале @khv_news.")
+			
+			bot.send_message(461300905, f"Подтвердил(а) участие в розыгрыше на канале @khv_news.", parse_mode="HTML")
 			return
 			
 	a = datetime.datetime.today()
