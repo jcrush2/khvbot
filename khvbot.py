@@ -167,19 +167,7 @@ def send(msg):
 		except:
 			continue
 
-@bot.message_handler(commands=["vin"], func=is_my_message)
-def vin(msg):
-	bot.delete_message(msg.chat.id, msg.message_id)
-	usera = bot.get_chat_member(msg.chat.id, msg.from_user.id)
-	if usera.status != 'creator':
-		return
-				
-	vin_database.clear()
-				
-	markup = telebot.types.InlineKeyboardMarkup()
-	button = telebot.types.InlineKeyboardButton(text=f'Участвовать!', callback_data="vin")
-	markup.add(button)
-	msg_id = bot.send_message(chat_id=msg.chat.id, text=f'🎉🎉🎉 ️{msg.text[4:]}', reply_markup=markup).message_id
+
 def name_pozd(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
