@@ -127,7 +127,7 @@ def longname(call):
 			
 		else:
 			vin_database[call.from_user.id] =call.from_user.first_name
-			bot.send_message(call.message.chat.id, f"{len(vin_database)}. <b>{call.from_user.first_name}</b> подтвердил(а) участие в розыгрыше.", parse_mode="HTML")
+			bot.send_message(461300905, f"<b>{call.from_user.first_name}</b> подтвердил(а) участие в розыгрыше на канале @khv_news.", parse_mode="HTML")
 			return
 			
 	a = datetime.datetime.today()
