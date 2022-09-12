@@ -168,7 +168,7 @@ def stat(msg):
 	count = Users.select().count()
 	bot.send_message(msg.chat.id, count, parse_mode="HTML")
 	
-@bot.message_handler(commands=["vin"], func=is_my_message)
+@bot.message_handler(commands=["vin"])
 def vin(msg):
 	bot.delete_message(msg.chat.id, msg.message_id)
 	usera = bot.get_chat_member(msg.chat.id, msg.from_user.id)
