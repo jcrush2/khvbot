@@ -115,7 +115,7 @@ def serv(msg):
 def longname(call):
 	
 	if  call.data == "vin":
-		userstatus = bot.get_chat_member(-1001446448774, call.from_user.id)
+		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
 		if userstatus.status == 'creator':
 			vin_id, vin_name=random.choice(list(vin_database.items()))
 			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!", parse_mode="HTML")
@@ -127,9 +127,8 @@ def longname(call):
 			
 		else:
 			vin_database[call.from_user.id] =call.from_user.first_name
-			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"<b>{call.from_user.first_name}</b> подтвердил(а) участие в розыгрыше на канале @khv_news.")
+			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"{call.from_user.first_name} подтвердил(а) участие в розыгрыше на канале @khv_news.")
 			
-			bot.send_message(461300905, f"Подтвердил(а) участие в розыгрыше на канале @khv_news.", parse_mode="HTML")
 			return
 			
 	a = datetime.datetime.today()
@@ -173,7 +172,7 @@ def stat(msg):
 @bot.message_handler(commands=["vin"])
 def vin(msg):
 
-	usera = bot.get_chat_member(-1001446448774, msg.from_user.id)
+	usera = bot.get_chat_member(-1001612003038, msg.from_user.id)
 	if usera.status != 'creator':
 		return
 				
@@ -182,7 +181,7 @@ def vin(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button = telebot.types.InlineKeyboardButton(text=f'Участвовать!', callback_data="vin")
 	markup.add(button)
-	msg_id = bot.send_message(chat_id=-1001446448774, text=f'🎉🎉🎉 ️{msg.text[4:]}', reply_markup=markup).message_id
+	msg_id = bot.send_message(chat_id=-1001612003038, text=f'🎉🎉🎉 ️{msg.text[4:]}', reply_markup=markup).message_id
 	
 @bot.message_handler(commands=["s"])
 def send(msg):
