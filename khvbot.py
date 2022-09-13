@@ -118,7 +118,7 @@ def longname(call):
 		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
 		if userstatus.status == 'creator':
 
-			vin_id, vin_name= random.sample(list(vin_database.items(), 2))
+			vin_id, vin_name=random.choice(list(vin_database.items()))
 			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!\n\nСообщите ваше ФИО сюда ➡️ @KhvBot ", parse_mode="HTML")
 			return
 			
