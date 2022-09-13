@@ -117,7 +117,8 @@ def longname(call):
 	if  call.data == "vin":
 		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
 		if userstatus.status == 'creator':
-			vin_id, vin_name=random.choice(list(vin_database.items()))
+
+			vin_id, vin_name= random.sample(list(vin_database.items(), 2))
 			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!\n\nСообщите ваше ФИО сюда ➡️ @KhvBot ", parse_mode="HTML")
 			return
 			
@@ -184,7 +185,7 @@ def vin(msg):
 #	msg_id = bot.send_message(chat_id=-1001612003038, text=f'💥 ️{msg.text[2:]}', reply_markup=markup).message_id
 	
 	video = open('https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4', 'rb')
-	bot.send_video(-1001612003038, video, caption=f'💥 ️{msg.text[2:]}', reply_markup=markup)
+	bot.send_video(chat_id=-1001612003038, video=video, caption=f'💥 ️{msg.text[2:]}', reply_markup=markup)
 
 	
 @bot.message_handler(commands=["s"])
