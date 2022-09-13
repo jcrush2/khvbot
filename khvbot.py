@@ -184,8 +184,8 @@ def vin(msg):
 	markup.add(button)
 #	msg_id = bot.send_message(chat_id=-1001612003038, text=f'💥 ️{msg.text[2:]}', reply_markup=markup).message_id
 	
-	video = open('https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4', 'rb')
-	bot.send_video(chat_id=-1001612003038, video=video, caption=f'💥 ️{msg.text[2:]}', reply_markup=markup)
+
+	bot.send_video(-1001612003038, "https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4", caption=f'💥 ️{msg.text[2:]}', reply_markup=markup)
 
 	
 @bot.message_handler(commands=["s"])
