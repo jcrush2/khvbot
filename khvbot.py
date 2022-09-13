@@ -116,27 +116,30 @@ def longname(call):
 	
 	if  call.data == "vin":
 		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
-		if userstatus.status == 'creator':
 
-			vin_id, vin_name=random.choice(list(vin_database.items()))
-			vin1=f"🎉 Победили в розыгрыше:\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			if vin_database.get(vin_id): vin_database.pop(vin_id)
-			
-			vin_id, vin_name=random.choice(list(vin_database.items()))
-			vin2=f"\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			if vin_database.get(vin_id): vin_database.pop(vin_id)
-			
-			vin_id, vin_name=random.choice(list(vin_database.items()))
-			vin3=f"\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			if vin_database.get(vin_id): vin_database.pop(vin_id)
-			
-			bot.send_message(call.message.chat.id, f"{vin1}{vin2}{vin3}\n\nДля оформления выигрыша, отправьте ваше ФИО\nнашему боту ➡️@KhvBot ", parse_mode="HTML")
-			return
 			
 		if userstatus.status != 'member':
 			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Вы не выполнили условия конкурса: подписаться на канал @khv_news.")
 			return
+
+		if userstatus.status == 'creator':
+			vin_database2 = random.choices(vin_database, k=2)
 			
+			vin_id, vin_name=vin_database2[0]
+
+			
+			vin1=f"🎉 Победили в розыгрыше:\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
+
+			
+			vin_id2, vin_name2=vin_database2[1]
+			vin2=f"\n\n•  <a href='tg://user?id={vin_id2}'>{vin_name2}</a> <tg-spoiler>{vin_id2}</tg-spoiler>"
+	
+#			vin_id3, vin_name3=vin_database2[2]
+#			vin3=f"\n\n•  <a href='tg://user?id={vin_id3}'>{vin_name3}</a> <tg-spoiler>{vin_id3}</tg-spoiler>"
+		
+			bot.send_message(call.message.chat.id, f"{vin1}{vin2}\n\nДля оформления выигрыша, отправьте ваше ФИО\nнашему боту ➡️@KhvBot ", parse_mode="HTML")
+			return
+
 		else:
 			vin_database[call.from_user.id] =call.from_user.first_name
 			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"{call.from_user.first_name} подтвердил(а) участие в розыгрыше на канале @khv_news.")
