@@ -115,7 +115,7 @@ def serv(msg):
 def longname(call):
 	
 	if  call.data == "vin":
-		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
+		userstatus = bot.get_chat_member(-1001119365436, call.from_user.id)
 		if userstatus.status == 'creator':
 
 			
@@ -191,7 +191,7 @@ def stat(msg):
 @bot.message_handler(commands=["vin"])
 def vin(msg):
 
-	usera = bot.get_chat_member(-1001612003038, msg.from_user.id)
+	usera = bot.get_chat_member(-1001119365436, msg.from_user.id)
 	if usera.status != 'creator':
 		return
 				
@@ -203,7 +203,7 @@ def vin(msg):
 #	msg_id = bot.send_message(chat_id=-1001612003038, text=f'💥 ️{msg.text[4:]}', reply_markup=markup).message_id
 	
 
-	bot.send_video(-1001612003038, "https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4", caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
+	bot.send_video(-1001119365436, "https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4", caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
 
 	
 @bot.message_handler(commands=["s"])
