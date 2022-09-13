@@ -118,11 +118,11 @@ def longname(call):
 		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
 		if userstatus.status == 'creator':
 			vin_id, vin_name=random.choice(list(vin_database.items()))
-			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!", parse_mode="HTML")
+			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!\n\nСообщите ваше ФИО сюда ➡️ @KhvBot ", parse_mode="HTML")
 			return
 			
 		if userstatus.status != 'member':
-			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Вы не выполнили условия конкурса: не подписались на канал.")
+			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Вы не выполнили условия конкурса: подписаться на канал @khv_news.")
 			return
 			
 		else:
@@ -181,7 +181,7 @@ def vin(msg):
 	markup = telebot.types.InlineKeyboardMarkup()
 	button = telebot.types.InlineKeyboardButton(text=f'Участвовать!', callback_data="vin")
 	markup.add(button)
-	msg_id = bot.send_message(chat_id=-1001612003038, text=f'🎉🎉🎉 ️{msg.text[4:]}', reply_markup=markup).message_id
+	msg_id = bot.send_message(chat_id=-1001612003038, text=f'💥 ️{msg.text[2:]}', reply_markup=markup).message_id
 	
 @bot.message_handler(commands=["s"])
 def send(msg):
