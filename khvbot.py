@@ -4,7 +4,6 @@ import hashlib
 import string
 import os
 import random
-import urllib.request
 import json
 
 
@@ -30,7 +29,7 @@ def start(msg):
 def main(msg):
 	keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
 	khvtrip = telebot.types.KeyboardButton(text="⁉️ Вопрос")
-	servise = telebot.types.KeyboardButton(text="ℹ️ Сервисы")
+	servise = telebot.types.KeyboardButton(text="ℹ️ Реклама")
 	newsadd = telebot.types.KeyboardButton(text="Прислaть новость")
 	cat = telebot.types.KeyboardButton(text="📂️ Группы")
 	loveadd = telebot.types.KeyboardButton(text="❤️ Знакомства")
@@ -80,14 +79,14 @@ def addnews(msg):
 def chats(msg):
 	chanel = "🤖 Бот Хабаровска @khvbot\
 \n\n• <b>Чаты и группы Хабаровска</b>\
-\n\n@khvchat - самый крупный чат Хабаровска\
+\n\n@khvchat - общение, чат Хабаровска\
 \n\n@dvchat - чат Дальнего Востока\
 \n\n@market27 - доска объявлений\
 \n\n@khvjob - работа: вакансии и резюме\
 \n\n<b>• Каналы Хабаровска</b>\
-\n\n@khv_news - куда сходить, актуальные новости Хабаровска\
+\n\n@khv_news - новости Хабаровска\
 \n\n@love_khv - знакомства\
-\n\n@khvtrip - знатоки Хабаровска (где, что, как: вопросы и ответы)\
+\n\n@khvtrip - полезный Хабаровск\
 \n\n@j_crush - блог о Хабаровске\
 \n\n@khabara_ru - объявления Хабаровск\
 \n\n@stfw_ru - IT-новости"
@@ -106,10 +105,9 @@ def serv(msg):
 	button3 = telebot.types.InlineKeyboardButton(text="Новости", callback_data="Новости")
 	button4 = telebot.types.InlineKeyboardButton(text="Клубы", callback_data="Клубы") 
 	button6 = telebot.types.InlineKeyboardButton(text="Фонтаны", callback_data="Фонтаны")
-	button7 = telebot.types.InlineKeyboardButton(text="Поздравления", callback_data="нг")
-	button8 = telebot.types.InlineKeyboardButton(text="Экстренные службы", callback_data="Экстренные службы") 
 
-	markup.add(button3, button1,button5, button2, button4, button6,button7,button8)
+
+	markup.add(button3, button1,button5, button2, button4, button6)
 	bot.send_message(chat_id=msg.chat.id, text="В Хабаровске:️", reply_markup=markup)
 @bot.callback_query_handler(func=lambda call: True)
 def longname(call):
@@ -163,16 +161,13 @@ def longname(call):
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/cl.html?{a}'>💃</a>", parse_mode="HTML")
 	if call.data == "Фонтаны":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/fontan.html?{a}'>⛲️</a>", parse_mode="HTML")
-	if call.data == "нг":
-		sent = bot.send_message(call.message.chat.id, 'Генератор поздравлений с Новым Годом\n\nВведите Имя человека которого хотите поздравить ⬇')
-		bot.register_next_step_handler(sent, name_pozd)
+
 		
 	if call.data == "new":
 		sent =bot.send_message(call.message.chat.id, text="Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇")
 		bot.register_next_step_handler(sent, love_foto)
 
-	if call.data == "Экстренные службы":
-		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/tel.html?{a}'>⚠️</a>", parse_mode="HTML")
+
 	if call.data == "Реклама":
 		bot.send_message(call.message.chat.id, reklama_post, parse_mode="HTML")
 		
@@ -223,30 +218,12 @@ def send(msg):
 			continue
 
 
-def name_pozd(msg):
-	if msg.text == "Прислaть новость":
-		addnews(msg)
-		return
-	if msg.text == "ℹ️ Сервисы":
-		serv(msg)
-		return
-	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
-		addlove(msg)
-		return
-	if msg.text == "📂️ Группы":
-		chats(msg)
-		return
-	if msg.text == "⁉️ Вопрос":
-		khvtrip(msg)
-		return
-	bot.reply_to(msg, f"<i>{exoooy(msg.text, 20)}</i>", parse_mode="HTML")
-	return
 	
 def love_foto(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "ℹ️ Сервисы":
+	if msg.text == "ℹ️ Реклама":
 		serv(msg)
 		return
 	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
@@ -289,7 +266,7 @@ def all_messages(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "ℹ️ Сервисы":
+	if msg.text == "ℹ️ Реклама":
 		serv(msg)
 		return
 	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
@@ -332,23 +309,8 @@ def all_messages(msg):
 		main(msg)
 		
 
-		
 	
-def exoooy(text,intro):
-	headers = {
-    'Content-Type': 'application/json',
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/605.1.15 '
-                  '(KHTML, like Gecko) Version/14.1.1 Safari/605.1.15',
-    'Origin': 'https://yandex.ru',
-    'Referer': 'https://yandex.ru/',}
 
-	API_URL = 'https://yandex.ru/lab/api/yalm/text3'
-	payload = {"query":text, "intro":intro, "filter":1}
-	params = json.dumps(payload).encode('utf-8')
-	req = urllib.request.Request(API_URL, data=params, headers=headers)
-	response = urllib.request.urlopen(req)
-	ya=json.loads(response.read().decode('utf-8'))
-	return ya["text"]
 
 # bot.polling(none_stop=True)
 
