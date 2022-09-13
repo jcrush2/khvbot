@@ -120,15 +120,15 @@ def longname(call):
 
 			vin_id, vin_name=random.choice(list(vin_database.items()))
 			vin1=f"🎉 Победили в розыгрыше:\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			vin_database.pop(vin_id)
+#			vin_database.pop(vin_id)
 			
 			vin_id, vin_name=random.choice(list(vin_database.items()))
 			vin2=f"\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			vin_database.pop(vin_id)
+			
 			
 			vin_id, vin_name=random.choice(list(vin_database.items()))
 			vin3=f"\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			vin_database.pop(vin_id)
+		
 			
 			bot.send_message(call.message.chat.id, f"{vin1}{vin2}{vin3}\n\nДля оформления выигрыша, сообщите ваше ФИО сюда ➡️ @KhvBot ", parse_mode="HTML")
 			return
