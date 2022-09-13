@@ -119,7 +119,7 @@ def longname(call):
 		if userstatus.status == 'creator':
 
 			vin_id, vin_name=random.choice(list(vin_database.items()))
-			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> победил(а) в розыгрыше!\n\nСообщите ваше ФИО сюда ➡️ @KhvBot ", parse_mode="HTML")
+			bot.send_message(call.message.chat.id, f"🎉 <a href='tg://user?id={vin_id}'>{vin_name}</a> ({vin_id}) победил(а) в розыгрыше!\n\nСообщите ваше ФИО сюда ➡️ @KhvBot ", parse_mode="HTML")
 			return
 			
 		if userstatus.status != 'member':
@@ -130,6 +130,9 @@ def longname(call):
 			vin_database[call.from_user.id] =call.from_user.first_name
 			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"{call.from_user.first_name} подтвердил(а) участие в розыгрыше на канале @khv_news.")
 			
+			bot.send_message(-542531596, f"Розыгрыш: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
+			
+
 			return
 			
 	a = datetime.datetime.today()
