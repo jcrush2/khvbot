@@ -117,11 +117,6 @@ def longname(call):
 	if  call.data == "vin":
 		userstatus = bot.get_chat_member(-1001612003038, call.from_user.id)
 
-			
-		if userstatus.status != 'member':
-			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Вы не выполнили условия конкурса: подписаться на канал @khv_news.")
-			return
-
 		if userstatus.status == 'creator':
 			vin_database2 = random.choices(vin_database, k=2)
 			
@@ -139,6 +134,12 @@ def longname(call):
 		
 			bot.send_message(call.message.chat.id, f"{vin1}{vin2}\n\nДля оформления выигрыша, отправьте ваше ФИО\nнашему боту ➡️@KhvBot ", parse_mode="HTML")
 			return
+			
+		if userstatus.status != 'member':
+			bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Вы не выполнили условия конкурса: подписаться на канал @khv_news.")
+			return
+
+
 
 		else:
 			vin_database[call.from_user.id] =call.from_user.first_name
