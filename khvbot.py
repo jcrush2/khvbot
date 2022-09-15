@@ -118,18 +118,12 @@ def longname(call):
 
 			
 			vin_id, vin_name=random.choice(list(vin_database.items()))
-			vin1=f"🎉 Победили в розыгрыше:\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
+			vin1=f"🎉 Победа в розыгрыше:\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
 			vin_database.pop(vin_id)
 			
-			vin_id, vin_name=random.choice(list(vin_database.items()))
-			vin2=f"\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			vin_database.pop(vin_id)
+
 			
-			vin_id, vin_name=random.choice(list(vin_database.items()))
-			vin3=f"\n\n•  <a href='tg://user?id={vin_id}'>{vin_name}</a> <tg-spoiler>{vin_id}</tg-spoiler>"
-			vin_database.pop(vin_id)
-			
-			bot.send_message(call.message.chat.id, f"{vin1}{vin2}{vin3}\n\nДля оформления выигрыша, отправьте ваше ФИО\nнашему боту ➡️@KhvBot ", parse_mode="HTML")
+			bot.send_message(call.message.chat.id, f"{vin1}\n\nДля оформления выигрыша, отправьте ваше ФИО\nнашему боту ➡️@KhvBot ", parse_mode="HTML")
 			return
 			
 		if userstatus.status != 'member':
@@ -198,7 +192,9 @@ def vin(msg):
 #	msg_id = bot.send_message(chat_id=-1001612003038, text=f'💥 ️{msg.text[4:]}', reply_markup=markup).message_id
 	
 
-	bot.send_video(-1001119365436, "https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4", caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
+#	bot.send_video(-1001119365436, "https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4", caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
+	
+	bot.send_photo(-1001119365436, "https://telegra.ph/file/3c049c801706e775eac43.png",  caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
 
 	
 @bot.message_handler(commands=["s"])
