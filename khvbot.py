@@ -194,7 +194,7 @@ def vin(msg):
 
 #	bot.send_video(-1001119365436, "https://telegra.ph/file/bafc9e0a995bbeb2cb7d4.mp4", caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
 	
-	bot.send_photo(-1001119365436, "https://telegra.ph/file/3c049c801706e775eac43.png",  caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
+	bot.send_photo(-1001119365436, "https://telegra.ph/file/56924530dbdb04f862f66.png",  caption=f'💥 ️{msg.text[4:]}', reply_markup=markup)
 
 	
 @bot.message_handler(commands=["s"])
