@@ -281,7 +281,10 @@ def all_messages(msg):
 
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.text.lower() == "/вопрос":
-			bot.send_message(-1001310162579,f'{msg.reply_to_message.text} <i>({msg.reply_to_message.forward_sender_name})</i>\n\n⁉️ @Khvtrip', parse_mode="HTML")
+			if msg.reply_to_message.forward_sender_name!=None:
+				bot.send_message(-1001310162579,f'{msg.reply_to_message.text} <i>({msg.reply_to_message.forward_sender_name})</i>\n\n⁉️ @Khvtrip', parse_mode="HTML")
+			else:
+				bot.send_message(-1001310162579,f'{msg.reply_to_message.text} <i>({msg.reply_to_message.forward_from.first_name})</i>\n\n⁉ @Khvtrip', parse_mode="HTML")
 			
 
 		if msg.text.lower() == "/l":
@@ -306,6 +309,8 @@ def all_messages(msg):
 		bot.send_message(msg.chat.id, f"{msg.from_user.first_name} ваше сообщение получено.")
 		main(msg)
 		
+
+	
 
 
 # bot.polling(none_stop=True)
