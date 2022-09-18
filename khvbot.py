@@ -289,7 +289,7 @@ def all_messages(msg):
 				markup = telebot.types.InlineKeyboardMarkup()
 				button = telebot.types.InlineKeyboardButton(text=f'📝 Написать', callback_data="love_send")
 				markup.add(button)
-				bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.caption}\n\n@Love_Khv", parse_mode="HTML", reply_markup=markup)
+				bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.caption}\n\n❤️ @Love_Khv", parse_mode="HTML", reply_markup=markup)
 			else:
 				markup = telebot.types.InlineKeyboardMarkup()
 				button = telebot.types.InlineKeyboardButton(text=f'📝 Написать', url=f'tg://user?id={msg.reply_to_message.forward_from.id}')
