@@ -307,8 +307,6 @@ def all_messages(msg):
 		main(msg)
 		
 
-	
-
 
 # bot.polling(none_stop=True)
 
