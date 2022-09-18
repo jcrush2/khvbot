@@ -141,7 +141,9 @@ def longname(call):
 			
 
 			return
-			
+	if call.data == "love_send":
+		bot.answer_callback_query(callback_query_id=call.id, show_alert=True,  text=f"Данная анкета размещена анонимно, чтобы познакомиться пришлите свою анкету в ❤️ @Love_Khv.")
+		
 	a = datetime.datetime.today()
 	if call.data == "Погода":
 		bot.send_message(call.message.chat.id, f"<a href='https://khabara.ru/weather.html?{a}'>🌡</a>", parse_mode="HTML")
@@ -245,10 +247,6 @@ def love_foto(msg):
 		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇ или нажмите /OTMEHA" , parse_mode="HTML")
 		bot.register_next_step_handler(sent, love_foto)
 		return
-	if msg.forward_sender_name!=None:
-		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Анонимные анкеты не публикуются, откройте в настройках Telegram раздел Конфиденциальность и включите возможность пересылки сообщений для ВСЕХ или нажмите /OTMEHA" , parse_mode="HTML")
-		bot.register_next_step_handler(sent, love_foto)
-		return
 	else:
 		bot.forward_message(-542531596, msg.chat.id, msg.message_id)
 		bot.send_message(-542531596, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
@@ -287,11 +285,16 @@ def all_messages(msg):
 			
 
 		if msg.text.lower() == "/l":
-
-			markup = telebot.types.InlineKeyboardMarkup()
-			button = telebot.types.InlineKeyboardButton(text=f'📝 Написать', url=f'tg://user?id={msg.reply_to_message.forward_from.id}')
-			markup.add(button)
-			bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n@Love_Khv", parse_mode="HTML", reply_markup=markup)
+			if msg.reply_to_message.forward_sender_name!=None:
+				markup = telebot.types.InlineKeyboardMarkup()
+				button = telebot.types.InlineKeyboardButton(text=f'📝 Написать', callback_data="love_send")
+				markup.add(button)
+				bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n@Love_Khv", parse_mode="HTML", reply_markup=markup)
+			else:
+				markup = telebot.types.InlineKeyboardMarkup()
+				button = telebot.types.InlineKeyboardButton(text=f'📝 Написать', url=f'tg://user?id={msg.reply_to_message.forward_from.id}')
+				markup.add(button)
+				bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n@Love_Khv", parse_mode="HTML", reply_markup=markup)
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
