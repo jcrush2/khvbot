@@ -219,7 +219,7 @@ def love_foto(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "ℹ️ Реклама":
+	if msg.text == "ℹ️ Реклама" or msg.text == "ℹ️ Сервисы":
 		serv(msg)
 		return
 	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
@@ -236,18 +236,23 @@ def love_foto(msg):
 		main(msg)
 		return
 
-	bot.forward_message(-542531596, msg.chat.id, msg.message_id)
-	bot.send_message(-542531596, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
+
 	if msg.document:
-		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Фото должно быть отправленно через галерею, повторите ⬇ или нажмите /OTMEHA" , parse_mode="HTML")
+		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Фото должно быть отправлено через галерею, повторите ⬇ или нажмите /OTMEHA" , parse_mode="HTML")
 		bot.register_next_step_handler(sent, love_foto)
 		return
 	if msg.caption ==None:
 		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Пришлите свое фото и добавьте в подпись инфу о себе, контакты ⬇ или нажмите /OTMEHA" , parse_mode="HTML")
 		bot.register_next_step_handler(sent, love_foto)
 		return
-		
+	if msg.forward_sender_name!=None:
+		sent = bot.send_message(msg.chat.id, text="⚠️ Ошибка! Анонимные анкеты не публикуются, откройте в настройках Telegram раздел Конфиденциальность и включите возможность пересылки сообщений для ВСЕХ или нажмите /OTMEHA" , parse_mode="HTML")
+		bot.register_next_step_handler(sent, love_foto)
+		return
 	else:
+		bot.forward_message(-542531596, msg.chat.id, msg.message_id)
+		bot.send_message(-542531596, f"От: <a href='tg://user?id={msg.from_user.id}'>{msg.from_user.first_name}</a> id: {msg.from_user.id}", parse_mode="HTML")
+		
 		bot.send_photo(msg.chat.id, msg.photo[0].file_id, caption = f"<b>{msg.from_user.first_name}</b>: {msg.caption}\n\nВаша анкета отправлена на модерацию...", parse_mode="HTML")
 		
 
@@ -262,7 +267,7 @@ def all_messages(msg):
 	if msg.text == "Прислaть новость":
 		addnews(msg)
 		return
-	if msg.text == "ℹ️ Реклама":
+	if msg.text == "ℹ️ Реклама" or msg.text == "ℹ️ Сервисы":
 		serv(msg)
 		return
 	if msg.text == "❤️ Знакомства" or msg.text == "❤️ Любовь":
@@ -278,21 +283,15 @@ def all_messages(msg):
 
 	if msg.chat.id == TO_CHAT_ID:
 		if msg.text.lower() == "/вопрос":
-			bot.send_message(-1001310162579,f'⁉️ {msg.reply_to_message.text}', parse_mode="HTML")
+			bot.send_message(-1001310162579,f'{msg.reply_to_message.text} От: <i>{msg.reply_to_message.forward_sender_name}</i>\n\n⁉️ @Khvtrip', parse_mode="HTML")
+			
+
 		if msg.text.lower() == "/l":
-			if msg.reply_to_message.caption !=None:
-				if msg.reply_to_message.forward_sender_name!=None:
-					bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.caption}", parse_mode="HTML")
-				else:
-					bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
-			else:
-				if msg.reply_to_message.caption ==None:
-					bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
-					
-				if msg.reply_to_message.forward_sender_name!=None:
-					bot.send_message(-1001099972307, f"<b>{msg.reply_to_message.forward_sender_name}</b>: {msg.reply_to_message.text}", parse_mode="HTML")
-				else:
-					bot.send_message(-1001099972307, f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.text}\n\n<a href='tg://user?id={msg.reply_to_message.forward_from.id}'>📝 Написать</a>", parse_mode="HTML")
+
+			markup = telebot.types.InlineKeyboardMarkup()
+			button = telebot.types.InlineKeyboardButton(text=f'📝 Написать', url=f'tg://user?id={msg.reply_to_message.forward_from.id}')
+			markup.add(button)
+			bot.send_photo(-1001099972307, msg.reply_to_message.photo[0].file_id, caption = f"<b>{msg.reply_to_message.forward_from.first_name}</b>: {msg.reply_to_message.caption}\n\n@Love_Khv", parse_mode="HTML", reply_markup=markup)
 		else:
 			bot.copy_message(message_id=msg.message_id,chat_id=msg.reply_to_message.forward_from.id,from_chat_id=msg.chat.id)
 			bot.send_message(TO_CHAT_ID, "отправлено")
